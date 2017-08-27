@@ -6,8 +6,6 @@ using AcApp = Autodesk.AutoCAD.ApplicationServices.Core.Application;
 using Autodesk.AutoCAD.Runtime;
 using Autodesk.AutoCAD.Windows;
 using Autodesk.Windows;
-using mpSettings;
-using ModPlus;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -17,8 +15,10 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Autodesk.AutoCAD.Colors;
-using mpMsg;
 using System.Windows.Input;
+using ModPlusAPI;
+using ModPlusAPI.Windows;
+using ModPlusAPI.Windows.Helpers;
 
 namespace mpPlinesEdit
 {
@@ -31,17 +31,12 @@ namespace mpPlinesEdit
         public PlinesEdit()
         {
             InitializeComponent();
-            MpWindowHelpers.OnWindowStartUp(
-                this,
-                MpSettings.GetValue("Settings", "MainSet", "Theme"),
-                MpSettings.GetValue("Settings", "MainSet", "AccentColor"),
-                MpSettings.GetValue("Settings", "MainSet", "BordersType")
-                );
+            this.OnWindowStartUp();
             BtColor.Background = new SolidColorBrush(ColorIndexToMediaColor(MpPlines.HelpGeometryColor));
             bool b;
             ChkRibbon.Checked -= ChkRibbon_OnChecked;
             ChkRibbon.Unchecked -= ChkRibbon_OnUnchecked;
-            ChkRibbon.IsChecked = bool.TryParse(MpSettings.GetValue("Settings", "mpPlinesedit", "LoadRibbonPanel"), out b) && b;
+            ChkRibbon.IsChecked = bool.TryParse(UserConfigFile.GetValue(UserConfigFile.ConfigFileZone.Settings, "mpPlinesedit", "LoadRibbonPanel"), out b) && b;
             ChkRibbon.Checked += ChkRibbon_OnChecked;
             ChkRibbon.Unchecked += ChkRibbon_OnUnchecked;
         }
@@ -58,7 +53,7 @@ namespace mpPlinesEdit
             {
                 MpPlines.HelpGeometryColor = cd.Color.ColorIndex;
                 BtColor.Background = new SolidColorBrush(ColorIndexToMediaColor(cd.Color.ColorIndex));
-                MpSettings.SetValue("Settings", "mpPlinesedit", "HelpGeometryColor", cd.Color.ColorIndex.ToString(CultureInfo.InvariantCulture), true);
+                UserConfigFile.SetValue(UserConfigFile.ConfigFileZone.Settings, "mpPlinesedit", "HelpGeometryColor", cd.Color.ColorIndex.ToString(CultureInfo.InvariantCulture), true);
             }
         }
 
@@ -80,14 +75,14 @@ namespace mpPlinesEdit
 
         private void ChkRibbon_OnChecked(object sender, RoutedEventArgs e)
         {
-            MpSettings.SetValue("Settings", "mpPlinesedit", "LoadRibbonPanel", true.ToString(), true);
+            UserConfigFile.SetValue(UserConfigFile.ConfigFileZone.Settings, "mpPlinesedit", "LoadRibbonPanel", true.ToString(), true);
             // load ribbon
             PlinesEditRibbonBuilder.AddPanelToRibbon(false, LvFunctions.ItemsSource as List<PlinesEditFunction.PlinesFunction>);
         }
 
         private void ChkRibbon_OnUnchecked(object sender, RoutedEventArgs e)
         {
-            MpSettings.SetValue("Settings", "mpPlinesedit", "LoadRibbonPanel", false.ToString(), true);
+            UserConfigFile.SetValue(UserConfigFile.ConfigFileZone.Settings, "mpPlinesedit", "LoadRibbonPanel", false.ToString(), true);
             // unload ribbon
             PlinesEditRibbonBuilder.RemovePanelFromRibbon(false);
         }
@@ -119,7 +114,7 @@ namespace mpPlinesEdit
                 
                 int i;
                 MpPlines.HelpGeometryColor = int.TryParse(
-                    MpSettings.GetValue("Settings", "mpPlinesedit", "HelpGeometryColor"), out i)
+                    UserConfigFile.GetValue(UserConfigFile.ConfigFileZone.Settings, "mpPlinesedit", "HelpGeometryColor"), out i)
                     ? i
                     : 150;
                 // for ribbon
@@ -127,7 +122,7 @@ namespace mpPlinesEdit
             }
             catch (System.Exception exception)
             {
-                MpExWin.Show(exception);
+                ExceptionBox.Show(exception);
             }
         }
 
@@ -146,7 +141,7 @@ namespace mpPlinesEdit
             if (ComponentManager.Ribbon != null)
             {
                 bool b;
-                LoadRibbonPanel = bool.TryParse(MpSettings.GetValue("Settings", "mpPlinesedit", "LoadRibbonPanel"), out b) && b;
+                LoadRibbonPanel = bool.TryParse(UserConfigFile.GetValue(UserConfigFile.ConfigFileZone.Settings, "mpPlinesedit", "LoadRibbonPanel"), out b) && b;
                 // Строим нашу вкладку
                 // Ribbon
                 if (LoadRibbonPanel)
@@ -284,6 +279,7 @@ namespace mpPlinesEdit
         [CommandMethod("ModPlus", "mpPlinesEdit", CommandFlags.Modal)]
         public static void Main()
         {
+            Statistic.SendCommandStarting(new Interface());
             if (_win != null)
             {
                 _win.Activate();
@@ -335,7 +331,7 @@ namespace mpPlinesEdit
             else
             {
                 if (!fromInit)
-                    MpMsgWin.Show("Не найдена вкладка ModPlus");
+                    ModPlusAPI.Windows.MessageBox.Show("Не найдена вкладка ModPlus", MessageBoxIcon.Close);
                 else AcApp.DocumentManager.MdiActiveDocument.Editor.WriteMessage("\nНе найдена вкладка ModPlus для добавления панели работы с полилиниями");
             }
         }
@@ -362,7 +358,7 @@ namespace mpPlinesEdit
             else
             {
                 if (!fromInit)
-                    MpMsgWin.Show("Не найдена вкладка ModPlus");
+                    ModPlusAPI.Windows.MessageBox.Show("Не найдена вкладка ModPlus", MessageBoxIcon.Close);
                 else AcApp.DocumentManager.MdiActiveDocument.Editor.WriteMessage("\nНе найдена вкладка ModPlus для добавления панели работы с полилиниями");
             }
         }

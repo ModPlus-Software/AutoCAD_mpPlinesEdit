@@ -2,9 +2,8 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
-using mpMsg;
-using mpSettings;
-using ModPlus;
+using ModPlusAPI.Windows;
+using ModPlusAPI.Windows.Helpers;
 
 namespace mpPlinesEdit.Help
 {
@@ -16,12 +15,7 @@ namespace mpPlinesEdit.Help
         public NoArcSettings()
         {
             InitializeComponent();
-            MpWindowHelpers.OnWindowStartUp(
-                this,
-                MpSettings.GetValue("Settings", "MainSet", "Theme"),
-                MpSettings.GetValue("Settings", "MainSet", "AccentColor"),
-                MpSettings.GetValue("Settings", "MainSet", "BordersType")
-                );
+            this.OnWindowStartUp();
         }
 
         private void BtOk_OnClick(object sender, RoutedEventArgs e)
@@ -87,7 +81,7 @@ namespace mpPlinesEdit.Help
                 }
                 catch (Exception exception)
                 {
-                    MpExWin.Show(exception);
+                    ExceptionBox.Show(exception);
                 }
             }
         }

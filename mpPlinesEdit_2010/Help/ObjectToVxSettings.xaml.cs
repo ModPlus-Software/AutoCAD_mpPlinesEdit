@@ -1,8 +1,8 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using mpSettings;
-using ModPlus;
+using ModPlusAPI;
+using ModPlusAPI.Windows.Helpers;
 
 namespace mpPlinesEdit.Help
 {
@@ -14,28 +14,23 @@ namespace mpPlinesEdit.Help
         public ObjectToVxSettings()
         {
             InitializeComponent();
-            MpWindowHelpers.OnWindowStartUp(
-                this,
-                MpSettings.GetValue("Settings", "MainSet", "Theme"),
-                MpSettings.GetValue("Settings", "MainSet", "AccentColor"),
-                MpSettings.GetValue("Settings", "MainSet", "BordersType")
-                );
+            this.OnWindowStartUp();
             bool b;
             int i;
             ChkExcludeFirstAndLastPt.IsChecked =
-                bool.TryParse(MpSettings.GetValue("Settings", "PlObjectToVx", "ExcludeFirstAndLast"), out b) && b;
+                bool.TryParse(UserConfigFile.GetValue(UserConfigFile.ConfigFileZone.Settings, "PlObjectToVx", "ExcludeFirstAndLast"), out b) && b;
             CbCopyBlockBy.SelectedIndex =
-                int.TryParse(MpSettings.GetValue("Settings", "PlObjectToVx", "CopyBlockBy"), out i) ? i : 0;
+                int.TryParse(UserConfigFile.GetValue(UserConfigFile.ConfigFileZone.Settings, "PlObjectToVx", "CopyBlockBy"), out i) ? i : 0;
             CbRotateBy.SelectedIndex =
-                int.TryParse(MpSettings.GetValue("Settings", "PlObjectToVx", "RotateBy"), out i) ? i : 0;
+                int.TryParse(UserConfigFile.GetValue(UserConfigFile.ConfigFileZone.Settings, "PlObjectToVx", "RotateBy"), out i) ? i : 0;
         }
 
         private void BtOk_OnClick(object sender, RoutedEventArgs e)
         {
-            MpSettings.SetValue("Settings", "PlObjectToVx", "ExcludeFirstAndLast",(ChkExcludeFirstAndLastPt.IsChecked != null && ChkExcludeFirstAndLastPt.IsChecked.Value).ToString(), false);
-            MpSettings.SetValue("Settings", "PlObjectToVx", "CopyBlockBy", CbCopyBlockBy.SelectedIndex.ToString(), false);
-            MpSettings.SetValue("Settings", "PlObjectToVx", "RotateBy", CbRotateBy.SelectedIndex.ToString(), false);
-            MpSettings.SaveFile();
+            UserConfigFile.SetValue(UserConfigFile.ConfigFileZone.Settings, "PlObjectToVx", "ExcludeFirstAndLast",(ChkExcludeFirstAndLastPt.IsChecked != null && ChkExcludeFirstAndLastPt.IsChecked.Value).ToString(), false);
+            UserConfigFile.SetValue(UserConfigFile.ConfigFileZone.Settings, "PlObjectToVx", "CopyBlockBy", CbCopyBlockBy.SelectedIndex.ToString(), false);
+            UserConfigFile.SetValue(UserConfigFile.ConfigFileZone.Settings, "PlObjectToVx", "RotateBy", CbRotateBy.SelectedIndex.ToString(), false);
+            UserConfigFile.SaveConfigFile();
             DialogResult = true;
         }
 

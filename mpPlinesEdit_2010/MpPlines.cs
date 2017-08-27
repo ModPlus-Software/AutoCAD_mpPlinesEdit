@@ -21,9 +21,9 @@ using AcApp = Autodesk.AutoCAD.ApplicationServices.Application;
 using AcApp = Autodesk.AutoCAD.ApplicationServices.Core.Application;
 #endif
 using Autodesk.AutoCAD.Runtime;
-using mpMsg;
 using mpPlinesEdit.Help;
-using mpSettings;
+using ModPlusAPI;
+using ModPlusAPI.Windows;
 using Polyline = Autodesk.AutoCAD.DatabaseServices.Polyline;
 
 namespace mpPlinesEdit
@@ -35,6 +35,7 @@ namespace mpPlinesEdit
         [CommandMethod("ModPlus", "mpPl-3Dto2D", CommandFlags.UsePickSet)]
         public static void mpPl_3Dto2D()
         {
+            Statistic.SendCommandStarting(new Interface());
             var doc = AcApp.DocumentManager.MdiActiveDocument;
             var db = doc.Database;
             var ed = doc.Editor;
@@ -92,7 +93,7 @@ namespace mpPlinesEdit
             }
             catch (System.Exception exception)
             {
-                MpExWin.Show(exception);
+                ExceptionBox.Show(exception);
             }
         }
 
@@ -102,6 +103,7 @@ namespace mpPlinesEdit
         [CommandMethod("ModPlus", "mpPl-VxMatchRemove", CommandFlags.UsePickSet)]
         public static void mpPl_VxMatchRemove()
         {
+            Statistic.SendCommandStarting(new Interface());
             try
             {
                 var doc = AcApp.DocumentManager.MdiActiveDocument;
@@ -233,14 +235,14 @@ namespace mpPlinesEdit
                             if (deleted > 0)
                             {
                                 if (plCount == 1)
-                                    MpMsgWin.Show("Удалено вершин: " + deleted);
+                                    MessageBox.Show("Удалено вершин: " + deleted);
                                 else
                                     ed.WriteMessage("\nПолилиния: " + objectId + " удалено вершин: " + deleted);
                             }
                             else
                             {
                                 if (plCount == 1)
-                                    MpMsgWin.Show("Полилиния не содержит одинаковых вершин");
+                                    MessageBox.Show("Полилиния не содержит одинаковых вершин");
                                 else ed.WriteMessage("\nПолилиния " + objectId + " не содержит одинаковых вершин");
                             }
                         }
@@ -250,7 +252,7 @@ namespace mpPlinesEdit
             }
             catch (System.Exception exception)
             {
-                MpExWin.Show(exception);
+                ExceptionBox.Show(exception);
             }
         }
 
@@ -260,6 +262,7 @@ namespace mpPlinesEdit
         [CommandMethod("ModPlus", "mpPl-VxCollin", CommandFlags.UsePickSet)]
         public static void mpPl_VxCollin()
         {
+            Statistic.SendCommandStarting(new Interface());
             var doc = AcApp.DocumentManager.MdiActiveDocument;
             var db = doc.Database;
             var ed = doc.Editor;
@@ -284,14 +287,14 @@ namespace mpPlinesEdit
                          {
                              TbMaxA =
                              {
-                                 Text = double.TryParse(ModPlus.MpCadHelpers.GetStringXData("mpPl_VxCollin_maxA"),
+                                 Text = double.TryParse(ModPlus.Helpers.XDataHelpers.GetStringXData("mpPl_VxCollin_maxA"),
                                      out d)
                                      ? d.ToString(CultureInfo.InvariantCulture)
                                      : "0.0"
                              },
                              TbMaxH =
                              {
-                                 Text = double.TryParse(ModPlus.MpCadHelpers.GetStringXData("mpPl_VxCollin_maxH"),
+                                 Text = double.TryParse(ModPlus.Helpers.XDataHelpers.GetStringXData("mpPl_VxCollin_maxH"),
                                      out d)
                                      ? d.ToString(CultureInfo.InvariantCulture)
                                      : "0.0"
@@ -300,10 +303,10 @@ namespace mpPlinesEdit
                          if (win.ShowDialog() == true)
                          {
                              maxH = double.TryParse(win.TbMaxH.Text, out d) ? d : 0.0;
-                             ModPlus.MpCadHelpers.SetStringXData("mpPl_VxCollin_maxH", maxH.ToString(CultureInfo.InvariantCulture));
+                             ModPlus.Helpers.XDataHelpers.SetStringXData("mpPl_VxCollin_maxH", maxH.ToString(CultureInfo.InvariantCulture));
                              ed.WriteMessage("\nМаксимальное отклонение от прямой (Н) принято: " + maxH);
                              maxA = double.TryParse(win.TbMaxA.Text, out d) ? d : 0.0;
-                             ModPlus.MpCadHelpers.SetStringXData("mpPl_VxCollin_maxA", maxA.ToString(CultureInfo.InvariantCulture));
+                             ModPlus.Helpers.XDataHelpers.SetStringXData("mpPl_VxCollin_maxA", maxA.ToString(CultureInfo.InvariantCulture));
                              ed.WriteMessage("\nУгловой допуск в градусах (a) принят: " + maxA);
                          }
                      }
@@ -341,7 +344,7 @@ namespace mpPlinesEdit
                                     if (pline.NumberOfVertices <= 2)
                                     {
                                         if (plCount == 1)
-                                            MpMsgWin.Show("Полилиния содержит всего " + pline.NumberOfVertices +
+                                            MessageBox.Show("Полилиния содержит всего " + pline.NumberOfVertices +
                                                           " вершины!");
                                         else
                                             ed.WriteMessage("\nПолилиния: " + objectId + " содержит всего " +
@@ -407,7 +410,7 @@ namespace mpPlinesEdit
                                     if (vertexes.Count <= 2)
                                     {
                                         if (plCount == 1)
-                                            MpMsgWin.Show("Полилиния содержит всего " + vertexes.Count + " вершины!");
+                                            MessageBox.Show("Полилиния содержит всего " + vertexes.Count + " вершины!");
                                         else
                                             ed.WriteMessage("\nПолилиния: " + objectId + " содержит всего " +
                                                             vertexes.Count +
@@ -466,7 +469,7 @@ namespace mpPlinesEdit
                                     if (vertexes.Count <= 2)
                                     {
                                         if (plCount == 1)
-                                            MpMsgWin.Show("Полилиния содержит всего " + vertexes.Count + " вершины!");
+                                            MessageBox.Show("Полилиния содержит всего " + vertexes.Count + " вершины!");
                                         else
                                             ed.WriteMessage("\nПолилиния: " + objectId + " содержит всего " +
                                                             vertexes.Count +
@@ -517,14 +520,14 @@ namespace mpPlinesEdit
                                 if (deleted > 0)
                                 {
                                     if (plCount == 1)
-                                        MpMsgWin.Show("Удалено вершин: " + deleted);
+                                        MessageBox.Show("Удалено вершин: " + deleted);
                                     else
                                         ed.WriteMessage("\nПолилиния: " + objectId + " удалено вершин: " + deleted);
                                 }
                                 else
                                 {
                                     if (plCount == 1)
-                                        MpMsgWin.Show("Полилиния не содержит вершин, лежащих на одной прямой или подходящих под условия допуска");
+                                        MessageBox.Show("Полилиния не содержит вершин, лежащих на одной прямой или подходящих под условия допуска");
                                     else
                                         ed.WriteMessage("\nПолилиния: " + objectId +
                                                         " не содержит вершин, лежащих на одной прямой или подходящих под условия допуска");
@@ -537,7 +540,7 @@ namespace mpPlinesEdit
             }
             catch (System.Exception exception)
             {
-                MpExWin.Show(exception);
+                ExceptionBox.Show(exception);
             }
         }
 
@@ -548,6 +551,7 @@ namespace mpPlinesEdit
         [CommandMethod("ModPlus", "mpPl-ObjectToVx", CommandFlags.UsePickSet)]
         public static void mpPl_ObjectToVx()
         {
+            Statistic.SendCommandStarting(new Interface());
             try
             {
                 var doc = AcApp.DocumentManager.MdiActiveDocument;
@@ -714,7 +718,7 @@ namespace mpPlinesEdit
             }
             catch (System.Exception exception)
             {
-                MpExWin.Show(exception);
+                ExceptionBox.Show(exception);
             }
         }
 
@@ -745,6 +749,7 @@ namespace mpPlinesEdit
         [CommandMethod("ModPlus", "mpPl-Arc2Line", CommandFlags.UsePickSet)]
         public static void mpPl_Arc2Line()
         {
+            Statistic.SendCommandStarting(new Interface());
             var doc = AcApp.DocumentManager.MdiActiveDocument;
             var db = doc.Database;
             var ed = doc.Editor;
@@ -767,7 +772,7 @@ namespace mpPlinesEdit
                     if (per.Status != PromptStatus.OK) return;
 
                     var plineId = per.ObjectId;
-                    var pickedPt = ModPlus.MpCadHelpers.UcsToWcs(per.PickedPoint);
+                    var pickedPt = ModPlus.Helpers.AutocadHelpers.UcsToWcs(per.PickedPoint);
 
                     using (doc.LockDocument())
                     {
@@ -795,7 +800,7 @@ namespace mpPlinesEdit
             }
             catch (System.Exception exception)
             {
-                MpExWin.Show(exception);
+                ExceptionBox.Show(exception);
             }
             finally
             {
@@ -863,6 +868,7 @@ namespace mpPlinesEdit
         [CommandMethod("ModPlus", "mpPl-Line2Arc", CommandFlags.UsePickSet)]
         public static void mpPl_Line2Arc()
         {
+            Statistic.SendCommandStarting(new Interface());
             try
             {
                 var doc = AcApp.DocumentManager.MdiActiveDocument;
@@ -883,7 +889,7 @@ namespace mpPlinesEdit
                     if (per.Status != PromptStatus.OK) return;
 
                     var plineId = per.ObjectId;
-                    var pickedPt = ModPlus.MpCadHelpers.UcsToWcs(per.PickedPoint);
+                    var pickedPt = ModPlus.Helpers.AutocadHelpers.UcsToWcs(per.PickedPoint);
 
                     using (doc.LockDocument())
                     {
@@ -909,7 +915,7 @@ namespace mpPlinesEdit
             }
             catch (System.Exception exception)
             {
-                MpExWin.Show(exception);
+                ExceptionBox.Show(exception);
             }
         }
 
@@ -1042,6 +1048,7 @@ namespace mpPlinesEdit
         [CommandMethod("ModPlus", "mpPl-AddVertex", CommandFlags.UsePickSet)]
         public static void mpPl_AddVertex()
         {
+            Statistic.SendCommandStarting(new Interface());
             try
             {
                 var doc = AcApp.DocumentManager.MdiActiveDocument;
@@ -1092,7 +1099,7 @@ namespace mpPlinesEdit
             }
             catch (System.Exception exception)
             {
-                MpExWin.Show(exception);
+                ExceptionBox.Show(exception);
             }
         }
 
@@ -1216,6 +1223,7 @@ namespace mpPlinesEdit
         [CommandMethod("ModPlus", "mpPl-Rect3Pt", CommandFlags.Redraw)]
         public static void mpPl_Rect3Pt()
         {
+            Statistic.SendCommandStarting(new Interface());
             try
             {
                 var doc = AcApp.DocumentManager.MdiActiveDocument;
@@ -1262,7 +1270,7 @@ namespace mpPlinesEdit
             }
             catch (System.Exception exception)
             {
-                MpExWin.Show(exception);
+                ExceptionBox.Show(exception);
             }
         }
 
@@ -1277,8 +1285,8 @@ namespace mpPlinesEdit
 
             public PromptResult StartJig(Point3d fPt, Point3d sPt)
             {
-                _fPoint = ModPlus.MpCadHelpers.UcsToWcs(fPt);
-                _sPoint = ModPlus.MpCadHelpers.UcsToWcs(sPt);
+                _fPoint = ModPlus.Helpers.AutocadHelpers.UcsToWcs(fPt);
+                _sPoint = ModPlus.Helpers.AutocadHelpers.UcsToWcs(sPt);
                 _prevPoint = sPt;
                 _polyline = new Polyline();
                 //return AcApp.DocumentManager.MdiActiveDocument.Editor.Drag(this);
@@ -1380,6 +1388,7 @@ namespace mpPlinesEdit
         [SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
         public static void mpPl_NoArc()
         {
+            Statistic.SendCommandStarting(new Interface());
             try
             {
                 var doc = AcApp.DocumentManager.MdiActiveDocument;
@@ -1705,7 +1714,7 @@ namespace mpPlinesEdit
             }
             catch (System.Exception exception)
             {
-                MpExWin.Show(exception);
+                ExceptionBox.Show(exception);
             }
         }
         /// <summary>
@@ -1746,6 +1755,7 @@ namespace mpPlinesEdit
         [CommandMethod("ModPlus", "mpPl-MiddleLine", CommandFlags.Session)]
         public static void mpPl_MiddleLine()
         {
+            Statistic.SendCommandStarting(new Interface());
             var doc = AcApp.DocumentManager.MdiActiveDocument;
             var db = doc.Database;
             var ed = doc.Editor;
@@ -1789,7 +1799,7 @@ namespace mpPlinesEdit
                         var pio = new PromptIntegerOptions("\nКоличество опорных точек: ")
                         {
                             DefaultValue =
-                                int.TryParse(MpSettings.GetValue("Settings", "mpPl_MiddleLine", "PointCount"), out i) ? i : 100,
+                                int.TryParse(UserConfigFile.GetValue(UserConfigFile.ConfigFileZone.Settings, "mpPl_MiddleLine", "PointCount"), out i) ? i : 100,
                             LowerLimit = 2,
                             UpperLimit = 1000
                         };
@@ -1797,7 +1807,7 @@ namespace mpPlinesEdit
                         var pir = ed.GetInteger(pio);
                         if (pir.Status != PromptStatus.OK) return;
                         var oporPtCount = pir.Value;
-                        MpSettings.SetValue("Settings", "mpPl_MiddleLine", "PointCount", oporPtCount.ToString(CultureInfo.InvariantCulture), true);
+                        UserConfigFile.SetValue(UserConfigFile.ConfigFileZone.Settings, "mpPl_MiddleLine", "PointCount", oporPtCount.ToString(CultureInfo.InvariantCulture), true);
 
                         // Получаем коллекцию точек для построения новой полилинии
                         
@@ -1833,8 +1843,9 @@ namespace mpPlinesEdit
                     }
                     // Запрос на упрощение полилинии
                     if (points.Count > 2)
-                        if (MpQstWin.Show("Упростить полилинию?" + Environment.NewLine +
-                                                "Будут удалены точки, лежащие на одной прямой"))
+                        if (MessageBox.ShowYesNo("Упростить полилинию?" + Environment.NewLine +
+                                                "Будут удалены точки, лежащие на одной прямой",
+                                                MessageBoxIcon.Question))
                         {
                             RemovePointsFromPline(pline.ObjectId);
                         }
@@ -1842,7 +1853,7 @@ namespace mpPlinesEdit
             }
             catch (System.Exception exception)
             {
-                MpExWin.Show(exception);
+                ExceptionBox.Show(exception);
             }
         }
 
@@ -1857,7 +1868,7 @@ namespace mpPlinesEdit
                 var maxH = 0.0; // Предельное отклонение высоты
 
                 var listOfDuplicateVertex = new List<int>();
-                for (var i = 0; i < pline.NumberOfVertices - 2; i++)
+                for (var i = 0; i < pline?.NumberOfVertices - 2; i++)
                 {
                     // Если в текущей вершине или следующей
                     // есть скругление, то пропускаем
@@ -1886,20 +1897,20 @@ namespace mpPlinesEdit
                 {
                     /*
             при каждом удалении вершины количество вершин меняется
-            значит после каждого удаления нужно нужно значение i уменьшать
+            значит после каждого удаления нужно значение i уменьшать
             на переменную, в которую будет записано кол-во проходов
             */
-                    pline.UpgradeOpen();
+                    pline?.UpgradeOpen();
                     var j = 0;
                     foreach (var i in listOfDuplicateVertex)
                     {
                         if (j == 0)
                         {
-                            pline.RemoveVertexAt(i);
+                            pline?.RemoveVertexAt(i);
                         }
                         else
                         {
-                            pline.RemoveVertexAt(i - j);
+                            pline?.RemoveVertexAt(i - j);
                         }
                         j++;
                     }

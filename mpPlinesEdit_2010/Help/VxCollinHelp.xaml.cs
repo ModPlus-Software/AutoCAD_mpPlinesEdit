@@ -3,8 +3,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using mpSettings;
-using ModPlus;
+using ModPlusAPI.Windows.Helpers;
 
 namespace mpPlinesEdit.Help
 {
@@ -16,12 +15,7 @@ namespace mpPlinesEdit.Help
         public VxCollinHelp()
         {
             InitializeComponent();
-            MpWindowHelpers.OnWindowStartUp(
-                this,
-                MpSettings.GetValue("Settings", "MainSet", "Theme"),
-                MpSettings.GetValue("Settings", "MainSet", "AccentColor"),
-                MpSettings.GetValue("Settings", "MainSet", "BordersType")
-                );
+            this.OnWindowStartUp();
         }
 
         private void BtOk_OnClick(object sender, RoutedEventArgs e)

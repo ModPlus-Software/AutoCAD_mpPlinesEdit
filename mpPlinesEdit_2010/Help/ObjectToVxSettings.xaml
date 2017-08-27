@@ -3,8 +3,8 @@
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
                       WindowStartupLocation="CenterScreen" SizeToContent="WidthAndHeight"
-ShowCloseButton="False" ShowIconOnTitleBar="False" ShowMaxRestoreButton="False"
-ShowMinButton="False" ShowSystemMenuOnRightClick="False" ShowTitleBar="False"
+                      ShowCloseButton="False" ShowIconOnTitleBar="False" ShowMaxRestoreButton="False"
+                      ShowMinButton="False" ShowSystemMenuOnRightClick="False" ShowTitleBar="False"
                       WindowStyle="None" Topmost="True" ResizeMode="NoResize"
                       Title="Настройки">
     <Window.Resources>
@@ -16,10 +16,8 @@ ShowMinButton="False" ShowSystemMenuOnRightClick="False" ShowTitleBar="False"
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/ModPlusAPI;component/Windows/WinResources/Styles.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
-            <Style x:Key="BtStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource SquareMetroButton}">
-                <Setter Property="BorderThickness" Value="1" />
-            </Style>
         </ResourceDictionary>
     </Window.Resources>
     <Grid Margin="5">
@@ -87,10 +85,10 @@ ShowMinButton="False" ShowSystemMenuOnRightClick="False" ShowTitleBar="False"
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
         <Button Grid.Column="0" Margin="2" VerticalAlignment="Center"
-                Style="{StaticResource BtStyle}" HorizontalAlignment="Center"
+                HorizontalAlignment="Center"
                 Content="Принять" Name="BtOk" Click="BtOk_OnClick"></Button>
         <Button Grid.Column="1" Margin="2" VerticalAlignment="Center"
-                Style="{StaticResource BtStyle}" HorizontalAlignment="Center"
+                HorizontalAlignment="Center"
                 Content="Отмена" Name="BtCancel" Click="BtCancel_OnClick"></Button>
         </Grid>
     </Grid>
