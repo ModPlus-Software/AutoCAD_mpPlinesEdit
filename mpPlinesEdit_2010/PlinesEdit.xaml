@@ -1,0 +1,107 @@
+﻿<controls:MetroWindow x:Class="mpPlinesEdit.PlinesEdit"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+                      xmlns:mpPlinesEdit="clr-namespace:mpPlinesEdit"
+                      WindowStartupLocation="CenterScreen" SizeToContent="WidthAndHeight"
+                      ShowIconOnTitleBar="False" ShowMaxRestoreButton="False"
+                      ShowMinButton="False" ShowSystemMenuOnRightClick="False" ShowTitleBar="False"
+                      WindowStyle="None" Topmost="True" ResizeMode="NoResize"
+                      Title="mpPliensEdit">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <Style x:Key="BtStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource SquareMetroButton}">
+                <Setter Property="BorderThickness" Value="1" />
+            </Style>
+            <BooleanToVisibilityConverter x:Key="BoolToVis" />
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="0" FontSize="16"
+                   Grid.Column="0" Grid.ColumnSpan="2">ПОЛИЛИНИИ</TextBlock>
+        <ListBox Grid.Row="1" Name="LvFunctions" Margin="2"
+                  Grid.Column="0" Grid.ColumnSpan="3" Height="300"
+                  BorderThickness="1" BorderBrush="{StaticResource BlackBrush}"
+                  >
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Button Tag="{Binding Name}" Click="FunctionButton_OnClick"
+                            HorizontalAlignment="Left"
+                            Style="{StaticResource BtStyle}" BorderThickness="0">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Border Grid.Column="0" Grid.Row="0" Grid.RowSpan="3"
+                                    Margin="2" VerticalAlignment="Center"
+                                    BorderBrush="{StaticResource AccentColorBrush}"
+                                    BorderThickness="1" Padding="2">
+                            <mpPlinesEdit:DevicePixels>
+                                <Image Width="32" Height="32" Stretch="UniformToFill"
+                                       Source="{Binding ImageBig}"></Image>
+                            </mpPlinesEdit:DevicePixels>
+                            </Border>
+                            <TextBlock Grid.Row="0" Grid.Column="1" FontSize="12" FontWeight="SemiBold"
+                                   Foreground="{StaticResource AccentColorBrush}"
+                                   Text="{Binding Name}"></TextBlock>
+                            <TextBlock Grid.Row="1" Grid.Column="1" FontSize="12"
+                                       Text="{Binding LocalName}"></TextBlock>
+                            <TextBlock Grid.Row="2" Grid.Column="1" FontSize="10"
+                                       Width="350" TextWrapping="Wrap"
+                                       Text="{Binding Description}"></TextBlock>
+                            <StackPanel Grid.Row="0" Grid.RowSpan="3" Grid.Column="2" Margin="5,0,0,0"
+                                        Orientation="Vertical" VerticalAlignment="Top">
+                                <TextBlock FontSize="12" Foreground="{StaticResource AccentColorBrush}"
+                                           FontWeight="SemiBold" ToolTip="Функция работает с 3D-полилинями"
+                                           Visibility="{Binding P3D, Converter={StaticResource BoolToVis}}">3D</TextBlock>
+                                <TextBlock FontSize="12" Foreground="{StaticResource AccentColorBrush}"
+                                           FontWeight="SemiBold" ToolTip="Функция работает с 2D-полилинями"
+                                           Visibility="{Binding P2D, Converter={StaticResource BoolToVis}}">2D</TextBlock>
+                                <TextBlock FontSize="12" Foreground="{StaticResource AccentColorBrush}"
+                                           FontWeight="SemiBold" ToolTip="Функция работает с LW-полилинями"
+                                           Visibility="{Binding Plw, Converter={StaticResource BoolToVis}}">LW</TextBlock>
+                            </StackPanel>
+                        </Grid>
+                    </Button>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <CheckBox Grid.Row="2" Margin="2" Name="ChkRibbon"
+                  Checked="ChkRibbon_OnChecked"
+                  Unchecked="ChkRibbon_OnUnchecked"
+                  Grid.Column="0" HorizontalAlignment="Left"
+                  Content="Добавить панель в ленту"></CheckBox>
+        <TextBlock Grid.Column="1" Grid.Row="2" Margin="2"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Center">Цвет вспомогательной геометрии:</TextBlock>
+        <Button Grid.Row="2" Grid.Column="2" Margin="2" Style="{StaticResource BtStyle}"
+                Name="BtColor" Click="BtColor_OnClick" VerticalAlignment="Center"
+                Content=" " HorizontalAlignment="Center">
+        </Button>
+    </Grid>
+</controls:MetroWindow>
