@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using ModPlusAPI.Interfaces;
 
 namespace mpPlinesEdit
@@ -8,7 +9,9 @@ namespace mpPlinesEdit
         public SupportedProduct SupportedProduct => SupportedProduct.AutoCAD;
         public string Name => "mpPlinesEdit";
         public string AvailProductExternalVersion => "2010";
-        public string ClassName => string.Empty;
+        public string FullClassName => string.Empty;
+        public string AppFullClassName => string.Empty;
+        public Guid AddInId => Guid.Empty;
         public string LName => "Полилинии";
         public string Description => "Сборник различных функций для работы с полилиниями";
         public string Author => "Пекшев Александр aka Modis";
