@@ -22,9 +22,6 @@ using ModPlusAPI.Windows.Helpers;
 
 namespace mpPlinesEdit
 {
-    /// <summary>
-    /// Логика взаимодействия для ObjectToVxSettings.xaml
-    /// </summary>
     public partial class PlinesEdit
     {
 
@@ -33,10 +30,9 @@ namespace mpPlinesEdit
             InitializeComponent();
             this.OnWindowStartUp();
             BtColor.Background = new SolidColorBrush(ColorIndexToMediaColor(MpPlines.HelpGeometryColor));
-            bool b;
             ChkRibbon.Checked -= ChkRibbon_OnChecked;
             ChkRibbon.Unchecked -= ChkRibbon_OnUnchecked;
-            ChkRibbon.IsChecked = bool.TryParse(UserConfigFile.GetValue(UserConfigFile.ConfigFileZone.Settings, "mpPlinesedit", "LoadRibbonPanel"), out b) && b;
+            ChkRibbon.IsChecked = bool.TryParse(UserConfigFile.GetValue(UserConfigFile.ConfigFileZone.Settings, "mpPlinesedit", "LoadRibbonPanel"), out var b) && b;
             ChkRibbon.Checked += ChkRibbon_OnChecked;
             ChkRibbon.Unchecked += ChkRibbon_OnUnchecked;
         }
@@ -89,8 +85,7 @@ namespace mpPlinesEdit
 
         private void FunctionButton_OnClick(object sender, RoutedEventArgs e)
         {
-            var button = sender as Button;
-            if (button != null)
+            if (sender is Button button)
             {
                 var fname = button.Tag.ToString();
                 Close();
@@ -98,10 +93,17 @@ namespace mpPlinesEdit
                     "_" + fname + " ", true, false, false);
             }
         }
+
+        private void UIElement_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
+        }
     }
 
     public class PlinesEditFunction : IExtensionApplication
     {
+        private const string LangItem = "mpPlinesEdit";
+
         public static bool LoadRibbonPanel;
         public static List<PlinesFunction> Functions;
 
@@ -111,10 +113,9 @@ namespace mpPlinesEdit
             {
                 // get list of functions
                 Functions = GetListOfFunctions();
-                
-                int i;
+
                 MpPlines.HelpGeometryColor = int.TryParse(
-                    UserConfigFile.GetValue(UserConfigFile.ConfigFileZone.Settings, "mpPlinesedit", "HelpGeometryColor"), out i)
+                    UserConfigFile.GetValue(UserConfigFile.ConfigFileZone.Settings, "mpPlinesedit", "HelpGeometryColor"), out var i)
                     ? i
                     : 150;
                 // for ribbon
@@ -140,8 +141,7 @@ namespace mpPlinesEdit
             // Проверяем, что лента загружена
             if (ComponentManager.Ribbon != null)
             {
-                bool b;
-                LoadRibbonPanel = bool.TryParse(UserConfigFile.GetValue(UserConfigFile.ConfigFileZone.Settings, "mpPlinesedit", "LoadRibbonPanel"), out b) && b;
+                LoadRibbonPanel = bool.TryParse(UserConfigFile.GetValue(UserConfigFile.ConfigFileZone.Settings, "mpPlinesedit", "LoadRibbonPanel"), out var b) && b;
                 // Строим нашу вкладку
                 // Ribbon
                 if (LoadRibbonPanel)
@@ -159,8 +159,8 @@ namespace mpPlinesEdit
             var func = new PlinesFunction
             {
                 Name = "mpPl-3Dto2D",
-                LocalName = "Преобразовать 3D полилинию в LW",
-                Description = "Создание копий выбранных 3D-полилиний в виде LW-полилиний (2D) с переносом в уровень 0.0",
+                LocalName = Language.GetItem(LangItem, "l1"),
+                Description = Language.GetItem(LangItem, "d1"),
                 P2D = false,
                 P3D = true,
                 Plw = false
@@ -170,8 +170,8 @@ namespace mpPlinesEdit
             func = new PlinesFunction
             {
                 Name = "mpPl-VxMatchRemove",
-                LocalName = "Удаление совпадающих вершин полилинии",
-                Description = "Удаление соседних вершин выбранных полилиний, которые имеют одинаковые координаты",
+                LocalName = Language.GetItem(LangItem, "l2"),
+                Description = Language.GetItem(LangItem, "d2"),
                 P2D = true,
                 P3D = true,
                 Plw = true
@@ -181,8 +181,8 @@ namespace mpPlinesEdit
             func = new PlinesFunction
             {
                 Name = "mpPl-VxCollin",
-                LocalName = "Удаление вершин, лежащих на одной прямой",
-                Description = "Удаление соседних вершин выбранных полилиний, которые лежат на одной прямой. Имеется возможность задать допуск на отклонение от прямой или угловой допуск",
+                LocalName = Language.GetItem(LangItem, "l3"),
+                Description = Language.GetItem(LangItem, "d3"),
                 P2D = true,
                 P3D = true,
                 Plw = true
@@ -192,8 +192,8 @@ namespace mpPlinesEdit
             func = new PlinesFunction
             {
                 Name = "mpPl-ObjectToVx",
-                LocalName = "Расположение объекта в вершинах полилинии",
-                Description = "Расположение выбранного объекта в вершинах полилинии. Имеется возможность поворота объекта по сегменту полилинии. Блоки могут быть расположены как по геометрическому центру, так и по точке вставки",
+                LocalName = Language.GetItem(LangItem, "l4"),
+                Description = Language.GetItem(LangItem, "d4"),
                 P2D = false,
                 P3D = false,
                 Plw = true
@@ -203,8 +203,8 @@ namespace mpPlinesEdit
             func = new PlinesFunction
             {
                 Name = "mpPl-Arc2Line",
-                LocalName = "Замена дугового сегмента линейным",
-                Description = "Замена указанного дугового сегмента полилинии линейным (замена дуги на отрезок)",
+                LocalName = Language.GetItem(LangItem, "l5"),
+                Description = Language.GetItem(LangItem, "d5"),
                 P2D = false,
                 P3D = false,
                 Plw = true
@@ -214,8 +214,8 @@ namespace mpPlinesEdit
             func = new PlinesFunction
             {
                 Name = "mpPl-Line2Arc",
-                LocalName = "Замена линейного сегмента дуговым",
-                Description = "Замена указанного линейного (или дугового) сегмента полилинии дуговым (замена отрезка на дугу). Имеется возможность строить дугу по касательной или точке на дуге",
+                LocalName = Language.GetItem(LangItem, "l6"),
+                Description = Language.GetItem(LangItem, "d6"),
                 P2D = false,
                 P3D = false,
                 Plw = true
@@ -225,8 +225,8 @@ namespace mpPlinesEdit
             func = new PlinesFunction
             {
                 Name = "mpPl-AddVertex",
-                LocalName = "Динамическое добавление вершины",
-                Description = "Динамическое добавление вершины к указанной полилинии",
+                LocalName = Language.GetItem(LangItem, "l7"),
+                Description = Language.GetItem(LangItem, "d8"),
                 P2D = false,
                 P3D = false,
                 Plw = true
@@ -236,8 +236,8 @@ namespace mpPlinesEdit
             func = new PlinesFunction
             {
                 Name = "mpPl-Rect3Pt",
-                LocalName = "Отрисовка прямоугольника по трем точкам",
-                Description = "Отрисовка прямоугольника по трем точкам",
+                LocalName = Language.GetItem(LangItem, "l8"),
+                Description = Language.GetItem(LangItem, "l8"),
                 P2D = false,
                 P3D = false,
                 Plw = true
@@ -247,8 +247,8 @@ namespace mpPlinesEdit
             func = new PlinesFunction
             {
                 Name = "mpPl-NoArc",
-                LocalName = "Удаление из полилинии дуговых сегментов",
-                Description = "Удаление из полилинии дуговых сегментов путем замены их линейными сегментами. Имеется несколько вариантов работы функции: количество сегментов, длина сегментов, высота сегментов (отклонение хорды), длина хорды",
+                LocalName = Language.GetItem(LangItem, "l9"),
+                Description = Language.GetItem(LangItem, "d9"),
                 P2D = false,
                 P3D = false,
                 Plw = true
@@ -258,8 +258,8 @@ namespace mpPlinesEdit
             func = new PlinesFunction
             {
                 Name = "mpPl-MiddleLine",
-                LocalName = "Построение средней линии",
-                Description = "Построение средней линии (в виде полилинии) между двумя указанными кривыми (отрезками, полилиниями или сплайнами)",
+                LocalName = Language.GetItem(LangItem, "l10"),
+                Description = Language.GetItem(LangItem, "d10"),
                 P2D = true,
                 P3D = true,
                 Plw = true
@@ -314,6 +314,8 @@ namespace mpPlinesEdit
 
     public class PlinesEditRibbonBuilder
     {
+        private const string LangItem = "mpPlinesEdit";
+
         public static void AddPanelToRibbon(bool fromInit, List<PlinesEditFunction.PlinesFunction> functions)
         {
             if (IsLoaded())
@@ -331,8 +333,8 @@ namespace mpPlinesEdit
             else
             {
                 if (!fromInit)
-                    ModPlusAPI.Windows.MessageBox.Show("Не найдена вкладка ModPlus", MessageBoxIcon.Close);
-                else AcApp.DocumentManager.MdiActiveDocument.Editor.WriteMessage("\nНе найдена вкладка ModPlus для добавления панели работы с полилиниями");
+                    ModPlusAPI.Windows.MessageBox.Show(Language.GetItem(LangItem, "h7"), MessageBoxIcon.Close);
+                else AcApp.DocumentManager.MdiActiveDocument.Editor.WriteMessage("\n" + Language.GetItem(LangItem, "h8"));
             }
         }
 
@@ -346,7 +348,7 @@ namespace mpPlinesEdit
                 var ribbonTab = ribbon.FindTab("ModPlus_ID");
                 foreach (var panel in ribbonTab.Panels)
                 {
-                    if (panel.Source.Title.Equals("Полилинии"))
+                    if (panel.Source.Title.Equals(Language.GetItem(LangItem, "h9")))
                     {
                         ribbonTab.Panels.Remove(panel);
                         break;
@@ -358,8 +360,8 @@ namespace mpPlinesEdit
             else
             {
                 if (!fromInit)
-                    ModPlusAPI.Windows.MessageBox.Show("Не найдена вкладка ModPlus", MessageBoxIcon.Close);
-                else AcApp.DocumentManager.MdiActiveDocument.Editor.WriteMessage("\nНе найдена вкладка ModPlus для добавления панели работы с полилиниями");
+                    ModPlusAPI.Windows.MessageBox.Show(Language.GetItem(LangItem, "h7"), MessageBoxIcon.Close);
+                else AcApp.DocumentManager.MdiActiveDocument.Editor.WriteMessage("\n" + Language.GetItem(LangItem, "h8"));
             }
         }
         // Проверка "загруженности" ленты
@@ -374,7 +376,7 @@ namespace mpPlinesEdit
         {
             var ribbonPanelSource = new RibbonPanelSource
             {
-                Title = "Полилинии"
+                Title = Language.GetItem(LangItem, "h9")
             };
             var ribbonPanel = new RibbonPanel
             {
@@ -392,7 +394,7 @@ namespace mpPlinesEdit
             }
             ribbonPanelSource.Items.Add(ribbonRowPanel);
             // add panel to ribbon tab
-            var contain = ribTab.Panels.Any(panel => panel.Source.Title.Equals("Полилинии"));
+            var contain = ribTab.Panels.Any(panel => panel.Source.Title.Equals(Language.GetItem(LangItem, "h9")));
             if (!contain)
                 ribTab.Panels.Insert(ribTab.Panels.Count - 1, ribbonPanel);
         }

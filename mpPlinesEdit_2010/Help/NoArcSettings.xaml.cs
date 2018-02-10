@@ -7,11 +7,10 @@ using ModPlusAPI.Windows.Helpers;
 
 namespace mpPlinesEdit.Help
 {
-    /// <summary>
-    /// Логика взаимодействия для ObjectToVxSettings.xaml
-    /// </summary>
     public partial class NoArcSettings
     {
+        private const string LangItem = "mpPlinesEdit";
+
         public NoArcSettings()
         {
             InitializeComponent();
@@ -30,8 +29,7 @@ namespace mpPlinesEdit.Help
 
         private void CbWorkType_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var cb = sender as ComboBox;
-            if (cb != null && cb.SelectedIndex != -1)
+            if (sender is ComboBox cb && cb.SelectedIndex != -1)
             {
                 try
                 {
@@ -43,9 +41,7 @@ namespace mpPlinesEdit.Help
                             image.UriSource = new Uri("pack://application:,,,/mpPlinesEdit_" + VersionData.FuncVersion + ";component/Images/NoArc1.png");
                             image.EndInit();
                             Img.Source = image;
-                            TbDescr.Text = "Деление дуги на равное указанное количество сегментов" + Environment.NewLine +
-                                           "На изображении показан вариант деления на 3 сегмента" + Environment.NewLine +
-                                           "R - радиус дуги в полилинии";
+                            TbDescr.Text = ModPlusAPI.Language.GetItem(LangItem, "h13");
                             break;
                         case 1:
                             image = new BitmapImage();
@@ -53,9 +49,7 @@ namespace mpPlinesEdit.Help
                             image.UriSource = new Uri("pack://application:,,,/mpPlinesEdit_" + VersionData.FuncVersion + ";component/Images/NoArc2.png");
                             image.EndInit();
                             Img.Source = image;
-                            TbDescr.Text = "Деление дуги на сегменты путем указания длины дуговых сегментов, получающихся в результате деления" + Environment.NewLine +
-                                           "R - радиус дуги в полилинии" + Environment.NewLine +
-                                           "L - длина дугового сегмента";
+                            TbDescr.Text = ModPlusAPI.Language.GetItem(LangItem, "h14");
                             break;
                         case 2:
                             image = new BitmapImage();
@@ -63,9 +57,7 @@ namespace mpPlinesEdit.Help
                             image.UriSource = new Uri("pack://application:,,,/mpPlinesEdit_" + VersionData.FuncVersion + ";component/Images/NoArc3.png");
                             image.EndInit();
                             Img.Source = image;
-                            TbDescr.Text = "Деление дуги на сегменты путем указания отклонения хорды (высоты сегмента)" + Environment.NewLine +
-                                           "R - радиус дуги в полилинии" + Environment.NewLine +
-                                           "H - высота сегмента";
+                            TbDescr.Text = ModPlusAPI.Language.GetItem(LangItem, "h15");
                             break;
                         case 3:
                             image = new BitmapImage();
@@ -73,9 +65,7 @@ namespace mpPlinesEdit.Help
                             image.UriSource = new Uri("pack://application:,,,/mpPlinesEdit_" + VersionData.FuncVersion + ";component/Images/NoArc4.png");
                             image.EndInit();
                             Img.Source = image;
-                            TbDescr.Text = "Деление дуги на сегменты путем указания длины хорды" + Environment.NewLine +
-                                           "R - радиус дуги в полилинии" + Environment.NewLine +
-                                           "Х - длина хорды";
+                            TbDescr.Text = ModPlusAPI.Language.GetItem(LangItem, "h16");
                             break;
                     }
                 }

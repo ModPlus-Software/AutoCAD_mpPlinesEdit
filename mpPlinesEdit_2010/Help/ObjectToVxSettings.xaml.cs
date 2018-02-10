@@ -6,21 +6,16 @@ using ModPlusAPI.Windows.Helpers;
 
 namespace mpPlinesEdit.Help
 {
-    /// <summary>
-    /// Логика взаимодействия для ObjectToVxSettings.xaml
-    /// </summary>
     public partial class ObjectToVxSettings 
     {
         public ObjectToVxSettings()
         {
             InitializeComponent();
             this.OnWindowStartUp();
-            bool b;
-            int i;
             ChkExcludeFirstAndLastPt.IsChecked =
-                bool.TryParse(UserConfigFile.GetValue(UserConfigFile.ConfigFileZone.Settings, "PlObjectToVx", "ExcludeFirstAndLast"), out b) && b;
+                bool.TryParse(UserConfigFile.GetValue(UserConfigFile.ConfigFileZone.Settings, "PlObjectToVx", "ExcludeFirstAndLast"), out var b) && b;
             CbCopyBlockBy.SelectedIndex =
-                int.TryParse(UserConfigFile.GetValue(UserConfigFile.ConfigFileZone.Settings, "PlObjectToVx", "CopyBlockBy"), out i) ? i : 0;
+                int.TryParse(UserConfigFile.GetValue(UserConfigFile.ConfigFileZone.Settings, "PlObjectToVx", "CopyBlockBy"), out var i) ? i : 0;
             CbRotateBy.SelectedIndex =
                 int.TryParse(UserConfigFile.GetValue(UserConfigFile.ConfigFileZone.Settings, "PlObjectToVx", "RotateBy"), out i) ? i : 0;
         }

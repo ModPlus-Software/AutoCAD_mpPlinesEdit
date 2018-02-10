@@ -5,8 +5,7 @@
                       WindowStartupLocation="CenterScreen" SizeToContent="WidthAndHeight"
                       ShowCloseButton="False" ShowIconOnTitleBar="False" ShowMaxRestoreButton="False"
                       ShowMinButton="False" ShowSystemMenuOnRightClick="False" ShowTitleBar="False"
-                      WindowStyle="None" Topmost="True" ResizeMode="NoResize"
-                      Title="Допуски">
+                      WindowStyle="None" Topmost="True" ResizeMode="NoResize">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -16,8 +15,9 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/ModPlusAPI;component/Windows/WinResources/Styles.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="pack://application:,,,/ModPlusAPI;component/Windows/WinResources/Styles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <XmlDataProvider x:Key="Lang" Source="E:/ModPlus/Languages/en-US.xml" XPath="ModPlus/mpPlinesEdit"/>
         </ResourceDictionary>
     </Window.Resources>
     <Grid Margin="5">
@@ -33,25 +33,27 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.Row="0" FontSize="16">ДОПУСКИ</TextBlock>
+        <TextBlock Grid.Row="0" FontSize="16" Grid.ColumnSpan="2" Margin="0,0,20,5"
+                   MouseLeftButtonDown="UIElement_OnMouseLeftButtonDown"
+                   Text="{Binding Source={StaticResource Lang}, XPath=h21}"></TextBlock>
         <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
                 Background="White" Padding="2"> 
             <Image Source="../Images/VxCollin_Help.png"
                    SnapsToDevicePixels="True" Height="117" Stretch="Uniform"></Image>
         </Border>
         <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
-            <TextBlock>P - рассматриваемая точка полилинии</TextBlock>
-            <TextBlock>- Функция работает с проверкой на оба условия</TextBlock>
+            <TextBlock Text="{Binding Source={StaticResource Lang}, XPath=h22}"></TextBlock>
+            <TextBlock Text="{Binding Source={StaticResource Lang}, XPath=h23}"></TextBlock>
             <TextBlock></TextBlock>
         </StackPanel>
         <TextBlock Grid.Column="0" Grid.Row="3" VerticalAlignment="Center"
-                   Margin="2">Н - максимальное отклонение от прямой:</TextBlock>
+                   Margin="2" Text="{Binding Source={StaticResource Lang}, XPath=h24}"></TextBlock>
         <TextBox Grid.Column="1" Grid.Row="3" Width="80" MaxLength="9" Margin="2"
                  PreviewTextInput="Tb_OnlyNums_NoMinus_OnPreviewTextInput"
                  PreviewKeyDown="TboxesInterpol_OnPreviewKeyDown"
                  VerticalAlignment="Center" Name="TbMaxH"></TextBox>
         <TextBlock Grid.Column="0" Grid.Row="4" VerticalAlignment="Center"
-                   Margin="2">а - угловой допуск:</TextBlock>
+                   Margin="2" Text="{Binding Source={StaticResource Lang}, XPath=h25}"></TextBlock>
         <TextBox Grid.Column="1" Grid.Row="4" Width="80" MaxLength="9" Margin="2"
                  PreviewTextInput="Tb_OnlyNums_NoMinus_OnPreviewTextInput"
                  PreviewKeyDown="TboxesInterpol_OnPreviewKeyDown"
@@ -59,6 +61,7 @@
         <Button Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"
                 Margin="2" VerticalAlignment="Center"
                 HorizontalAlignment="Center"
-                Content="Принять" Name="BtOk" Click="BtOk_OnClick"></Button>
+                Content="{Binding Source={StaticResource Lang}, XPath=accept}"
+                Name="BtOk" Click="BtOk_OnClick"></Button>
     </Grid>
 </controls:MetroWindow>

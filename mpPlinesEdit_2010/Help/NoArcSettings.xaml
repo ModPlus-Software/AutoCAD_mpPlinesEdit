@@ -7,8 +7,7 @@
                       ShowCloseButton="False" ShowIconOnTitleBar="False" ShowMaxRestoreButton="False"
                       ShowMinButton="False" ShowSystemMenuOnRightClick="False" ShowTitleBar="False"
                       WindowStyle="None" Topmost="True" ResizeMode="NoResize"
-                      Title="Настройки" Loaded="NoArcSettings_OnLoaded"
-                      >
+                      Loaded="NoArcSettings_OnLoaded">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -20,6 +19,7 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/ModPlusAPI;component/Windows/WinResources/Styles.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
+            <XmlDataProvider x:Key="Lang" Source="E:/ModPlus/Languages/en-US.xml" XPath="ModPlus/mpPlinesEdit"/>
         </ResourceDictionary>
     </Window.Resources>
     <Grid Margin="5">
@@ -36,20 +36,23 @@
             <ColumnDefinition Width="Auto"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <TextBlock Grid.Row="0" Grid.Column="0" Margin="2"
-                   VerticalAlignment="Center">Вариант работы:</TextBlock>
+                   Text="{Binding Source={StaticResource Lang}, XPath=h10}"
+                   VerticalAlignment="Center"></TextBlock>
         <ComboBox Grid.Row="0" Grid.Column="1" Margin="2" Width="170"
                   Name="CbWorkType" SelectionChanged="CbWorkType_OnSelectionChanged">
-            <ComboBoxItem Name="SegmentCount">Количество сегментов</ComboBoxItem>
-            <ComboBoxItem Name="SegmentLength">Длина сегмента</ComboBoxItem>
-            <ComboBoxItem Name="ChordHeight">Отклонение хорды</ComboBoxItem>
-            <ComboBoxItem Name="ChordLength">Длина хорды</ComboBoxItem>
+            <ComboBoxItem Name="SegmentCount" Content="{Binding Source={StaticResource Lang}, XPath=cb1}"></ComboBoxItem>
+            <ComboBoxItem Name="SegmentLength" Content="{Binding Source={StaticResource Lang}, XPath=cb2}"></ComboBoxItem>
+            <ComboBoxItem Name="ChordHeight" Content="{Binding Source={StaticResource Lang}, XPath=cb3}"></ComboBoxItem>
+            <ComboBoxItem Name="ChordLength" Content="{Binding Source={StaticResource Lang}, XPath=cb4}"></ComboBoxItem>
         </ComboBox>
         <CheckBox Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1"
-                  Content="Удалять выбранные полилинии" Name="ChkDeletePlines"></CheckBox>
+                  Content="{Binding Source={StaticResource Lang}, XPath=h17}" Name="ChkDeletePlines"></CheckBox>
         <TextBlock Grid.Row="2" Grid.Column="0" Margin="2"
-                   VerticalAlignment="Center" HorizontalAlignment="Center">Мин. обрабатываемый радиус дуги:</TextBlock>
+                   Text="{Binding Source={StaticResource Lang}, XPath=h11}"
+                   VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
         <TextBox Grid.Row="2" Grid.Column="1" Margin="2"
-                 VerticalAlignment="Center" Name="TbMinRadius">Любой</TextBox>
+                 Text="{Binding Source={StaticResource Lang}, XPath=h12}"
+                 VerticalAlignment="Center" Name="TbMinRadius"></TextBox>
         <Border Grid.Row="0" Grid.Column="2" Grid.RowSpan="4">
             <decorators:DevicePixels>
                 <Image Margin="5" Name="Img" Stretch="Uniform" Width="255"></Image>
@@ -68,12 +71,12 @@
             </Grid.ColumnDefinitions>
             <Button Grid.Column="0"
                 VerticalAlignment="Center" HorizontalAlignment="Center"
-                Margin="2" 
-                Click="BtOk_OnClick">Принять</Button>
+                Margin="2" Content="{Binding Source={StaticResource Lang}, XPath=accept}"
+                Click="BtOk_OnClick"></Button>
             <Button Grid.Column="1"
                 VerticalAlignment="Center" HorizontalAlignment="Center"
-                Margin="2" 
-                Click="BtCancel_OnClick">Отмена</Button>
+                Margin="2" Content="{Binding Source={StaticResource Lang}, XPath=cancel}"
+                Click="BtCancel_OnClick"></Button>
         </Grid>
 
     </Grid>

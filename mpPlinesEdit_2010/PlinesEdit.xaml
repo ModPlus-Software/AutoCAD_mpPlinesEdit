@@ -20,6 +20,7 @@
                 <ResourceDictionary Source="pack://application:,,,/ModPlusAPI;component/Windows/WinResources/Styles.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
             <BooleanToVisibilityConverter x:Key="BoolToVis" />
+            <XmlDataProvider x:Key="Lang" Source="E:/ModPlus/Languages/en-US.xml" XPath="ModPlus/mpPlinesEdit"></XmlDataProvider>
         </ResourceDictionary>
     </Window.Resources>
     <Grid Margin="5">
@@ -33,8 +34,10 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.Row="0" FontSize="16"
-                   Grid.Column="0" Grid.ColumnSpan="2">ПОЛИЛИНИИ</TextBlock>
+        <TextBlock Grid.Row="0" FontSize="16" Margin="0,0,20,5"
+                   Text="{Binding Source={StaticResource Lang}, XPath=h1}"
+                   Grid.Column="0" Grid.ColumnSpan="2"
+                   MouseLeftButtonDown="UIElement_OnMouseLeftButtonDown"></TextBlock>
         <ListView Grid.Row="1" Name="LvFunctions" Margin="2,4,2,2"
                   Grid.Column="0" Grid.ColumnSpan="3" Height="300"
                   BorderThickness="1" BorderBrush="{StaticResource AccentBaseColorBrush}"
@@ -75,13 +78,16 @@
                             <StackPanel Grid.Row="0" Grid.RowSpan="3" Grid.Column="2" Margin="5,0,0,0"
                                         Orientation="Vertical" VerticalAlignment="Top">
                                 <TextBlock FontSize="12" Foreground="{StaticResource AccentColorBrush}"
-                                           FontWeight="SemiBold" ToolTip="Функция работает с 3D-полилинями"
+                                           FontWeight="SemiBold" ToolTip="{Binding Source={StaticResource Lang}, XPath=h2}"
+                                           ToolTipService.InitialShowDelay="0"
                                            Visibility="{Binding P3D, Converter={StaticResource BoolToVis}}">3D</TextBlock>
                                 <TextBlock FontSize="12" Foreground="{StaticResource AccentColorBrush}"
-                                           FontWeight="SemiBold" ToolTip="Функция работает с 2D-полилинями"
+                                           FontWeight="SemiBold" ToolTip="{Binding Source={StaticResource Lang}, XPath=h3}"
+                                           ToolTipService.InitialShowDelay="0"
                                            Visibility="{Binding P2D, Converter={StaticResource BoolToVis}}">2D</TextBlock>
                                 <TextBlock FontSize="12" Foreground="{StaticResource AccentColorBrush}"
-                                           FontWeight="SemiBold" ToolTip="Функция работает с LW-полилинями"
+                                           FontWeight="SemiBold" ToolTip="{Binding Source={StaticResource Lang}, XPath=h4}"
+                                           ToolTipService.InitialShowDelay="0"
                                            Visibility="{Binding Plw, Converter={StaticResource BoolToVis}}">LW</TextBlock>
                             </StackPanel>
                         </Grid>
@@ -93,10 +99,11 @@
                   Checked="ChkRibbon_OnChecked"
                   Unchecked="ChkRibbon_OnUnchecked"
                   Grid.Column="0" HorizontalAlignment="Left"
-                  Content="Добавить панель в ленту"></CheckBox>
+                  Content="{Binding Source={StaticResource Lang}, XPath=h5}"></CheckBox>
         <TextBlock Grid.Column="1" Grid.Row="2" Margin="2"
                    HorizontalAlignment="Right"
-                   VerticalAlignment="Center">Цвет вспомогательной геометрии:</TextBlock>
+                   Text="{Binding Source={StaticResource Lang}, XPath=h6}"
+                   VerticalAlignment="Center"></TextBlock>
         <Button Grid.Row="2" Grid.Column="2" Margin="2"
                 Name="BtColor" Click="BtColor_OnClick" VerticalAlignment="Center"
                 Content=" " HorizontalAlignment="Center">

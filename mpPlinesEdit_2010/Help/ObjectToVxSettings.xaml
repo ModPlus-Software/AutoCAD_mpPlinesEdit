@@ -5,8 +5,7 @@
                       WindowStartupLocation="CenterScreen" SizeToContent="WidthAndHeight"
                       ShowCloseButton="False" ShowIconOnTitleBar="False" ShowMaxRestoreButton="False"
                       ShowMinButton="False" ShowSystemMenuOnRightClick="False" ShowTitleBar="False"
-                      WindowStyle="None" Topmost="True" ResizeMode="NoResize"
-                      Title="Настройки">
+                      WindowStyle="None" Topmost="True" ResizeMode="NoResize">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -16,8 +15,9 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/ModPlusAPI;component/Windows/WinResources/Styles.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="pack://application:,,,/ModPlusAPI;component/Windows/WinResources/Styles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <XmlDataProvider x:Key="Lang" Source="E:/ModPlus/Languages/en-US.xml" XPath="ModPlus/mpPlinesEdit"/>
         </ResourceDictionary>
     </Window.Resources>
     <Grid Margin="5">
@@ -32,24 +32,24 @@
         </Grid.RowDefinitions>
         
         <CheckBox Grid.Row="0" Grid.Column="0" Margin="2"
-                  Name="ChkExcludeFirstAndLastPt" Content="Исключить крайние точки"
+                  Name="ChkExcludeFirstAndLastPt" Content="{Binding Source={StaticResource Lang}, XPath=h18}"
                   Checked="ChkExcludeFirstAndLastPt_OnChecked"
                   Unchecked="ChkExcludeFirstAndLastPt_OnUnchecked"
                   ></CheckBox>
         <TextBlock Grid.Column="0" Grid.Row="1" Margin="2" VerticalAlignment="Center"
-                   Text="Копировать блоки:"></TextBlock>
+                   Text="{Binding Source={StaticResource Lang}, XPath=h19}"></TextBlock>
         <ComboBox  Grid.Row="2" VerticalAlignment="Center" Margin="20,2,2,2"
                   Name="CbCopyBlockBy">
-            <ComboBoxItem Content="по точке вставки блока"></ComboBoxItem>
-            <ComboBoxItem Content="по геометрическому центру"></ComboBoxItem>
+            <ComboBoxItem Content="{Binding Source={StaticResource Lang}, XPath=cb5}"></ComboBoxItem>
+            <ComboBoxItem Content="{Binding Source={StaticResource Lang}, XPath=cb6}"></ComboBoxItem>
         </ComboBox>
         <TextBlock Grid.Column="0" Grid.Row="3" Margin="2" VerticalAlignment="Center"
-                   Text="Поворачивать:"></TextBlock>
+                   Text="{Binding Source={StaticResource Lang}, XPath=h20}"></TextBlock>
         <ComboBox Grid.Row="4" Margin="20,2,2,2" VerticalAlignment="Center"
                   Name="CbRotateBy" SelectionChanged="CbRotateBy_OnSelectionChanged">
-            <ComboBoxItem Content="не поворачивать"></ComboBoxItem>
-            <ComboBoxItem Content="поворачивать по предыдущему сегменту"></ComboBoxItem>
-            <ComboBoxItem Content="поворачивать по последующему сегменту"></ComboBoxItem>
+            <ComboBoxItem Content="{Binding Source={StaticResource Lang}, XPath=cb7}"></ComboBoxItem>
+            <ComboBoxItem Content="{Binding Source={StaticResource Lang}, XPath=cb8}"></ComboBoxItem>
+            <ComboBoxItem Content="{Binding Source={StaticResource Lang}, XPath=cb9}"></ComboBoxItem>
         </ComboBox>
         <Grid Grid.Row="5" Margin="2" Width="300" Height="120"
               Background="White">
@@ -86,10 +86,12 @@
             </Grid.ColumnDefinitions>
         <Button Grid.Column="0" Margin="2" VerticalAlignment="Center"
                 HorizontalAlignment="Center"
-                Content="Принять" Name="BtOk" Click="BtOk_OnClick"></Button>
+                Content="{Binding Source={StaticResource Lang}, XPath=accept}" 
+                Name="BtOk" Click="BtOk_OnClick"></Button>
         <Button Grid.Column="1" Margin="2" VerticalAlignment="Center"
                 HorizontalAlignment="Center"
-                Content="Отмена" Name="BtCancel" Click="BtCancel_OnClick"></Button>
+                Content="{Binding Source={StaticResource Lang}, XPath=cancel}"
+                Name="BtCancel" Click="BtCancel_OnClick"></Button>
         </Grid>
     </Grid>
 </controls:MetroWindow>

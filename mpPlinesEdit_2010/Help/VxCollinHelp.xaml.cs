@@ -7,9 +7,6 @@ using ModPlusAPI.Windows.Helpers;
 
 namespace mpPlinesEdit.Help
 {
-    /// <summary>
-    /// Логика взаимодействия для VxCollinHelp.xaml
-    /// </summary>
     public partial class VxCollinHelp
     {
         public VxCollinHelp()
@@ -53,12 +50,16 @@ namespace mpPlinesEdit.Help
             // На "максимальность" проверяем если предыдущие провреки успешны
             if (max != null & result)
             {
-                double d;
-                if (double.TryParse(str, out d))
+                if (double.TryParse(str, out var d))
                     if (Math.Abs(d) > max) result = false;
             }
 
             return result;
+        }
+
+        private void UIElement_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
         }
     }
 }

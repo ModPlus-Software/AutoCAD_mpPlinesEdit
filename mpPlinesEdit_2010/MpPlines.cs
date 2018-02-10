@@ -30,6 +30,8 @@ namespace mpPlinesEdit
 {
     public class MpPlines
     {
+        private const string LangItem = "mpPlinesEdit";
+
         public static int HelpGeometryColor = 150;
 
         [CommandMethod("ModPlus", "mpPl-3Dto2D", CommandFlags.UsePickSet)]
@@ -44,7 +46,7 @@ namespace mpPlinesEdit
                 var pso = new PromptSelectionOptions
                 {
                     AllowDuplicates = false,
-                    MessageForAdding = "\nВыберите 3D-полилинии: "
+                    MessageForAdding = "\n" + Language.GetItem(LangItem, "k1") + ":"
                 };
                 var filterlist = new TypedValue[2];
                 filterlist[0] = new TypedValue((int)DxfCode.Start, "POLYLINE");
@@ -113,7 +115,7 @@ namespace mpPlinesEdit
                 var pso = new PromptSelectionOptions
                 {
                     AllowDuplicates = false,
-                    MessageForAdding = "\nВыберите полилинии: "
+                    MessageForAdding = "\n" + Language.GetItem(LangItem, "k2") + ":"
                 };
                 var filList = new[] { new TypedValue((int)DxfCode.Start, "*POLYLINE") };
                 var sf = new SelectionFilter(filList);
@@ -235,15 +237,16 @@ namespace mpPlinesEdit
                             if (deleted > 0)
                             {
                                 if (plCount == 1)
-                                    MessageBox.Show("Удалено вершин: " + deleted);
+                                    MessageBox.Show(Language.GetItem(LangItem, "k3") + ":" + deleted);
                                 else
-                                    ed.WriteMessage("\nПолилиния: " + objectId + " удалено вершин: " + deleted);
+                                    ed.WriteMessage("\n" + Language.GetItem(LangItem, "k4") + ":" + objectId + " " +
+                                        Language.GetItem(LangItem, "k3").ToLower() + ":" + deleted);
                             }
                             else
                             {
                                 if (plCount == 1)
-                                    MessageBox.Show("Полилиния не содержит одинаковых вершин");
-                                else ed.WriteMessage("\nПолилиния " + objectId + " не содержит одинаковых вершин");
+                                    MessageBox.Show(Language.GetItem(LangItem, "k4") + " " + Language.GetItem(LangItem, "k5"));
+                                else ed.WriteMessage("\n" + Language.GetItem(LangItem, "k4") + " " + objectId + " " + Language.GetItem(LangItem, "k5"));
                             }
                         }
                         tr.Commit();
@@ -273,22 +276,21 @@ namespace mpPlinesEdit
             {
                 AllowDuplicates = false
             };
-            pso.Keywords.Add("Dop", "ДОПуски");
+            pso.Keywords.Add("Dop", Language.GetItem(LangItem, "k7"));
             // Set our prompts to include our keywords
             var kws = pso.Keywords.GetDisplayString(true);
-            pso.MessageForAdding = "\nВыберите полилинии или: " + kws;
+            pso.MessageForAdding = "\n" + Language.GetItem(LangItem, "k6") + ":" + kws;
             pso.KeywordInput +=
                  delegate (object sender, SelectionTextInputEventArgs e)
                  {
                      if (e.Input.Equals("Dop"))
                      {
-                         double d;
                          var win = new VxCollinHelp
                          {
                              TbMaxA =
                              {
                                  Text = double.TryParse(ModPlus.Helpers.XDataHelpers.GetStringXData("mpPl_VxCollin_maxA"),
-                                     out d)
+                                     out var d)
                                      ? d.ToString(CultureInfo.InvariantCulture)
                                      : "0.0"
                              },
@@ -304,10 +306,10 @@ namespace mpPlinesEdit
                          {
                              maxH = double.TryParse(win.TbMaxH.Text, out d) ? d : 0.0;
                              ModPlus.Helpers.XDataHelpers.SetStringXData("mpPl_VxCollin_maxH", maxH.ToString(CultureInfo.InvariantCulture));
-                             ed.WriteMessage("\nМаксимальное отклонение от прямой (Н) принято: " + maxH);
+                             ed.WriteMessage("\n" + Language.GetItem(LangItem, "k8") + ":" + maxH);
                              maxA = double.TryParse(win.TbMaxA.Text, out d) ? d : 0.0;
                              ModPlus.Helpers.XDataHelpers.SetStringXData("mpPl_VxCollin_maxA", maxA.ToString(CultureInfo.InvariantCulture));
-                             ed.WriteMessage("\nУгловой допуск в градусах (a) принят: " + maxA);
+                             ed.WriteMessage("\n" + Language.GetItem(LangItem, "k9") + ":" + maxA);
                          }
                      }
                  };
@@ -344,11 +346,15 @@ namespace mpPlinesEdit
                                     if (pline.NumberOfVertices <= 2)
                                     {
                                         if (plCount == 1)
-                                            MessageBox.Show("Полилиния содержит всего " + pline.NumberOfVertices +
-                                                          " вершины!");
+                                            MessageBox.Show(
+                                                Language.GetItem(LangItem, "k4") + " " +
+                                                Language.GetItem(LangItem, "k10") + " " + pline.NumberOfVertices + " " +
+                                                Language.GetItem(LangItem, "k11") + "!");
                                         else
-                                            ed.WriteMessage("\nПолилиния: " + objectId + " содержит всего " +
-                                                            pline.NumberOfVertices + " вершины!");
+                                            ed.WriteMessage("\n" +
+                                                Language.GetItem(LangItem, "k4") + ":" + objectId + " " +
+                                                Language.GetItem(LangItem, "k10") + " " + pline.NumberOfVertices + " " +
+                                                Language.GetItem(LangItem, "k11") + "!");
                                         continue;
                                     }
                                     for (var i = 0; i < pline.NumberOfVertices - 2; i++)
@@ -410,11 +416,15 @@ namespace mpPlinesEdit
                                     if (vertexes.Count <= 2)
                                     {
                                         if (plCount == 1)
-                                            MessageBox.Show("Полилиния содержит всего " + vertexes.Count + " вершины!");
+                                            MessageBox.Show(
+                                                Language.GetItem(LangItem, "k4") + " " +
+                                                Language.GetItem(LangItem, "k10") + " " + vertexes.Count + " " +
+                                                Language.GetItem(LangItem, "k11") + "!");
                                         else
-                                            ed.WriteMessage("\nПолилиния: " + objectId + " содержит всего " +
-                                                            vertexes.Count +
-                                                            " вершины!");
+                                            ed.WriteMessage("\n" +
+                                                            Language.GetItem(LangItem, "k4") + ":" + objectId + " " +
+                                                            Language.GetItem(LangItem, "k10") + " " + vertexes.Count + " " +
+                                                            Language.GetItem(LangItem, "k11") + "!");
                                         continue;
                                     }
                                     for (var i = 0; i < vertexes.Count - 2; i++)
@@ -469,11 +479,15 @@ namespace mpPlinesEdit
                                     if (vertexes.Count <= 2)
                                     {
                                         if (plCount == 1)
-                                            MessageBox.Show("Полилиния содержит всего " + vertexes.Count + " вершины!");
+                                            MessageBox.Show(
+                                                Language.GetItem(LangItem, "k4") + " " +
+                                                Language.GetItem(LangItem, "k10") + " " + vertexes.Count + " " +
+                                                Language.GetItem(LangItem, "k11") + "!");
                                         else
-                                            ed.WriteMessage("\nПолилиния: " + objectId + " содержит всего " +
-                                                            vertexes.Count +
-                                                            " вершины!");
+                                            ed.WriteMessage("\n" +
+                                                            Language.GetItem(LangItem, "k4") + ":" + objectId + " " +
+                                                            Language.GetItem(LangItem, "k10") + " " + vertexes.Count + " " +
+                                                            Language.GetItem(LangItem, "k11") + "!");
                                         continue;
                                     }
                                     for (var i = 0; i < vertexes.Count - 2; i++)
@@ -520,17 +534,21 @@ namespace mpPlinesEdit
                                 if (deleted > 0)
                                 {
                                     if (plCount == 1)
-                                        MessageBox.Show("Удалено вершин: " + deleted);
+                                        MessageBox.Show(Language.GetItem(LangItem, "k3") + ":" + deleted);
                                     else
-                                        ed.WriteMessage("\nПолилиния: " + objectId + " удалено вершин: " + deleted);
+                                        ed.WriteMessage("\n" + Language.GetItem(LangItem, "k4") + ":" + objectId + " " +
+                                            Language.GetItem(LangItem, "k3").ToLower() + ":" + deleted);
                                 }
                                 else
                                 {
                                     if (plCount == 1)
-                                        MessageBox.Show("Полилиния не содержит вершин, лежащих на одной прямой или подходящих под условия допуска");
+                                        MessageBox.Show(
+                                            Language.GetItem(LangItem, "k4") + " " +
+                                            Language.GetItem(LangItem, "k12"));
                                     else
-                                        ed.WriteMessage("\nПолилиния: " + objectId +
-                                                        " не содержит вершин, лежащих на одной прямой или подходящих под условия допуска");
+                                        ed.WriteMessage("\n" +
+                                            Language.GetItem(LangItem, "k4") + ":" + objectId + " " +
+                                            Language.GetItem(LangItem, "k12"));
                                 }
                             }
                             tr.Commit();
@@ -558,24 +576,24 @@ namespace mpPlinesEdit
                 var db = doc.Database;
                 var ed = doc.Editor;
 
-                var peo = new PromptEntityOptions("\nВыберите полилинию: ")
+                var peo = new PromptEntityOptions("\n" + Language.GetItem(LangItem, "k13") + ":")
                 {
                     AllowNone = false,
                     AllowObjectOnLockedLayer = true
                 };
-                peo.SetRejectMessage("\nНеверный выбор");
+                peo.SetRejectMessage("\n" + Language.GetItem(LangItem, "wrong"));
                 peo.AddAllowedClass(typeof(Polyline), true);
 
                 var per = ed.GetEntity(peo);
                 if (per.Status != PromptStatus.OK) return;
                 var plineId = per.ObjectId;
 
-                peo = new PromptEntityOptions("\nВыберите объект для расположения: ")
+                peo = new PromptEntityOptions("\n" + Language.GetItem(LangItem, "k14") + ":")
                 {
                     AllowNone = false,
                     AllowObjectOnLockedLayer = false
                 };
-                peo.SetRejectMessage("\nНеверный выбор");
+                peo.SetRejectMessage("\n" + Language.GetItem(LangItem, "wrong"));
                 per = ed.GetEntity(peo);
                 if (per.Status != PromptStatus.OK) return;
                 var objectId = per.ObjectId;
@@ -760,12 +778,12 @@ namespace mpPlinesEdit
             {
                 while (true)
                 {
-                    var peo = new PromptEntityOptions("\nВыберите дуговой сегмент полилинии: ")
+                    var peo = new PromptEntityOptions("\n" + Language.GetItem(LangItem, "k15") + ":")
                     {
                         AllowNone = false,
                         AllowObjectOnLockedLayer = true
                     };
-                    peo.SetRejectMessage("\nНеверный выбор");
+                    peo.SetRejectMessage("\n" + Language.GetItem(LangItem, "wrong"));
                     peo.AddAllowedClass(typeof(Polyline), true);
 
                     var per = ed.GetEntity(peo);
@@ -877,12 +895,12 @@ namespace mpPlinesEdit
                 var workType = "Tangent";
                 while (true)
                 {
-                    var peo = new PromptEntityOptions("\nВыберите сегмент полилинии: ")
+                    var peo = new PromptEntityOptions("\n" + Language.GetItem(LangItem, "k16") + ":")
                     {
                         AllowNone = false,
                         AllowObjectOnLockedLayer = true
                     };
-                    peo.SetRejectMessage("\nНеверный выбор");
+                    peo.SetRejectMessage("\n" + Language.GetItem(LangItem, "wrong"));
                     peo.AddAllowedClass(typeof(Polyline), true);
 
                     var per = ed.GetEntity(peo);
@@ -951,11 +969,9 @@ namespace mpPlinesEdit
                 while (true)
                 {
                     if (_workType.Equals("Tangent"))
-                        ppo.SetMessageAndKeywords("\nУкажите точку на косательной или: [Касательная/точка Прохождения]",
-                            "Tangent Point");
+                        ppo.SetMessageAndKeywords("\n" + Language.GetItem(LangItem, "k17"), "Tangent Point");
                     if (_workType.Equals("Point"))
-                        ppo.SetMessageAndKeywords("\nУкажите точку на дуге или: [Касательная/точка Прохождения]",
-                            "Tangent Point");
+                        ppo.SetMessageAndKeywords("\n" + Language.GetItem(LangItem, "k18"), "Tangent Point");
                     ppo.BasePoint = _startPoint;
                     ppo.UseBasePoint = true;
                     ppo.UserInputControls = UserInputControls.Accept3dCoordinates
@@ -1055,12 +1071,12 @@ namespace mpPlinesEdit
                 var db = doc.Database;
                 var ed = doc.Editor;
 
-                var peo = new PromptEntityOptions("\nВыберите полилинию: ")
+                var peo = new PromptEntityOptions("\n" + Language.GetItem(LangItem, "k13") + ":")
                 {
                     AllowNone = false,
                     AllowObjectOnLockedLayer = true
                 };
-                peo.SetRejectMessage("\nНеверный выбор");
+                peo.SetRejectMessage("\n" + Language.GetItem(LangItem, "wrong"));
                 peo.AddAllowedClass(typeof(Polyline), true);
 
                 var per = ed.GetEntity(peo);
@@ -1132,7 +1148,7 @@ namespace mpPlinesEdit
 
             protected override SamplerStatus Sampler(JigPrompts prompts)
             {
-                var ppo = new JigPromptPointOptions("\nУкажите точку (удерж.Ctrl - сместиться на вершину вперед):")
+                var ppo = new JigPromptPointOptions("\n" + Language.GetItem(LangItem, "k19") + ":")
                 {
                     BasePoint = _startPoint,
                     UseBasePoint = true,
@@ -1230,7 +1246,7 @@ namespace mpPlinesEdit
                 var db = doc.Database;
                 var ed = doc.Editor;
                 // first point
-                var ppo = new PromptPointOptions("\nУкажите первую точку: ")
+                var ppo = new PromptPointOptions("\n" + Language.GetItem(LangItem, "k20") + ":")
                 {
                     UseBasePoint = false,
                     AllowNone = true
@@ -1241,7 +1257,7 @@ namespace mpPlinesEdit
                 //var fPt = ModPlus.MpCadHelpers.UcsToWcs(ppr.Value);
                 var fPt = ppr.Value;
                 // second point
-                ppo = new PromptPointOptions("\nУкажите вторую точку: ")
+                ppo = new PromptPointOptions("\n" + Language.GetItem(LangItem, "k21") + ":")
                 {
                     UseBasePoint = true,
                     BasePoint = fPt,
@@ -1257,7 +1273,7 @@ namespace mpPlinesEdit
                     // jig
                     var jig = new Rect3PtJig();
                     var jr = jig.StartJig(fPt, sPt);
-                    
+
                     if (jr.Status != PromptStatus.OK) return;
                     // draw pline
                     var pline = jig.Poly();
@@ -1306,7 +1322,7 @@ namespace mpPlinesEdit
 
             protected override SamplerStatus Sampler(JigPrompts prompts)
             {
-                var jppo = new JigPromptPointOptions("\nУкажите третью точку: ")
+                var jppo = new JigPromptPointOptions("\n" + Language.GetItem(LangItem, "k22") + ":")
                 {
                     UserInputControls = UserInputControls.Accept3dCoordinates
                                         | UserInputControls.NoNegativeResponseAccepted
@@ -1406,7 +1422,7 @@ namespace mpPlinesEdit
                 var pso = new PromptSelectionOptions
                 {
                     AllowDuplicates = false,
-                    MessageForAdding = "\nВыберите полилинии: "
+                    MessageForAdding = "\n" + Language.GetItem(LangItem, "k2") + ":"
                 };
                 var filList = new[] { new TypedValue((int)DxfCode.Start, "LWPOLYLINE") };
                 var sf = new SelectionFilter(filList);
@@ -1426,7 +1442,7 @@ namespace mpPlinesEdit
                             {
                                 #region segmentCount
                                 case "SegmentCount":
-                                    var pio = new PromptIntegerOptions("\nУкажите количество сегментов: ")
+                                    var pio = new PromptIntegerOptions("\n" + Language.GetItem(LangItem, "k23") + ":")
                                     {
                                         DefaultValue = 5,
                                         LowerLimit = 1,
@@ -1491,7 +1507,7 @@ namespace mpPlinesEdit
                                 #endregion
                                 #region SegmentLength
                                 case "SegmentLength":
-                                    var pdo = new PromptDoubleOptions("\nУкажите длину сегмента: ")
+                                    var pdo = new PromptDoubleOptions("\n" + Language.GetItem(LangItem, "k24") + ":")
                                     {
                                         DefaultValue = 100,
                                         AllowArbitraryInput = true,
@@ -1559,7 +1575,7 @@ namespace mpPlinesEdit
                                 #endregion
                                 #region ChordHeight
                                 case "ChordHeight":
-                                    pdo = new PromptDoubleOptions("\nУкажите отклонение хорды (высоту сегмента): ")
+                                    pdo = new PromptDoubleOptions("\n" + Language.GetItem(LangItem, "k25") + ":")
                                     {
                                         DefaultValue = 0.5,
                                         AllowArbitraryInput = true,
@@ -1629,7 +1645,7 @@ namespace mpPlinesEdit
                                 #endregion
                                 #region ChordLength
                                 case "ChordLength":
-                                    pdo = new PromptDoubleOptions("\nУкажите длину хорды: ")
+                                    pdo = new PromptDoubleOptions("\n" + Language.GetItem(LangItem, "k26") + ":")
                                     {
                                         DefaultValue = 10,
                                         AllowArbitraryInput = true,
@@ -1770,12 +1786,12 @@ namespace mpPlinesEdit
                     using (var tr = doc.TransactionManager.StartTransaction())
                     {
                         // Выбор первого примитива (кривой)
-                        var peo = new PromptEntityOptions("\nВыберите первый опорный элемент (отрезок, полилиния или сплайн): ")
+                        var peo = new PromptEntityOptions("\n" + Language.GetItem(LangItem, "k27") + ":")
                         {
                             AllowNone = false,
                             AllowObjectOnLockedLayer = true
                         };
-                        peo.SetRejectMessage("\nReject");
+                        peo.SetRejectMessage("\n" + Language.GetItem(LangItem, "wrong"));
                         peo.AddAllowedClass(typeof(Polyline2d), true);
                         peo.AddAllowedClass(typeof(Polyline3d), true);
                         peo.AddAllowedClass(typeof(Polyline), true);
@@ -1789,14 +1805,14 @@ namespace mpPlinesEdit
                         var firstCurve = tr.GetObject(per.ObjectId, OpenMode.ForRead) as Curve;
                         if (firstCurve == null) return;
                         // Выбор второго примитива (кривой)
-                        peo.Message = "\nВыберите второй опорный элемент (отрезок, полилиния или сплайн): ";
+                        peo.Message = "\n" + Language.GetItem(LangItem, "k28") + ":";
                         per = ed.GetEntity(peo);
                         if (per.Status != PromptStatus.OK) return;
                         var secondCurve = tr.GetObject(per.ObjectId, OpenMode.ForRead) as Curve;
                         if (secondCurve == null) return;
                         // Количество опорных точек
                         int i;
-                        var pio = new PromptIntegerOptions("\nКоличество опорных точек: ")
+                        var pio = new PromptIntegerOptions("\n"+ Language.GetItem(LangItem, "k29") +":")
                         {
                             DefaultValue =
                                 int.TryParse(UserConfigFile.GetValue(UserConfigFile.ConfigFileZone.Settings, "mpPl_MiddleLine", "PointCount"), out i) ? i : 100,
@@ -1810,7 +1826,7 @@ namespace mpPlinesEdit
                         UserConfigFile.SetValue(UserConfigFile.ConfigFileZone.Settings, "mpPl_MiddleLine", "PointCount", oporPtCount.ToString(CultureInfo.InvariantCulture), true);
 
                         // Получаем коллекцию точек для построения новой полилинии
-                        
+
                         for (var j = 0; j < oporPtCount; j++)
                         {
                             var firstDist = (firstCurve.GetDistanceAtParameter(firstCurve.EndParam) -
@@ -1833,7 +1849,7 @@ namespace mpPlinesEdit
                         if (points.Count > 0)
                         {
                             var btr = (BlockTableRecord)tr.GetObject(db.CurrentSpaceId, OpenMode.ForWrite, false);
-                            
+
                             for (var k = 0; k < points.Count; k++)
                                 pline.AddVertexAt(k, points[k], 0.0, 0.0, 0.0);
                             btr.AppendEntity(pline);
@@ -1843,9 +1859,7 @@ namespace mpPlinesEdit
                     }
                     // Запрос на упрощение полилинии
                     if (points.Count > 2)
-                        if (MessageBox.ShowYesNo("Упростить полилинию?" + Environment.NewLine +
-                                                "Будут удалены точки, лежащие на одной прямой",
-                                                MessageBoxIcon.Question))
+                        if (MessageBox.ShowYesNo(Language.GetItem(LangItem, "k30"), MessageBoxIcon.Question))
                         {
                             RemovePointsFromPline(pline.ObjectId);
                         }
@@ -1887,7 +1901,7 @@ namespace mpPlinesEdit
                         var ang = (pt3 - pt2).GetAngleTo(pt2 - pt1);
                         if (ang <= maxA)
                             listOfDuplicateVertex.Add(i + 1);
-                        var h = Math.Abs((pt2 - pt1).Length*Math.Cos(ang));
+                        var h = Math.Abs((pt2 - pt1).Length * Math.Cos(ang));
                         if (h <= maxH)
                             listOfDuplicateVertex.Add(i + 1);
                     }
