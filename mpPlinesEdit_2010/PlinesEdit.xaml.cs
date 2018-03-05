@@ -18,7 +18,6 @@ using Autodesk.AutoCAD.Colors;
 using System.Windows.Input;
 using ModPlusAPI;
 using ModPlusAPI.Windows;
-using ModPlusAPI.Windows.Helpers;
 
 namespace mpPlinesEdit
 {
@@ -28,7 +27,7 @@ namespace mpPlinesEdit
         public PlinesEdit()
         {
             InitializeComponent();
-            this.OnWindowStartUp();
+            Title = ModPlusAPI.Language.GetItem("mpPlinesEdit", "h1");
             BtColor.Background = new SolidColorBrush(ColorIndexToMediaColor(MpPlines.HelpGeometryColor));
             ChkRibbon.Checked -= ChkRibbon_OnChecked;
             ChkRibbon.Unchecked -= ChkRibbon_OnUnchecked;

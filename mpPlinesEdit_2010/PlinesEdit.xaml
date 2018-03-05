@@ -1,31 +1,23 @@
-﻿<controls:MetroWindow x:Class="mpPlinesEdit.PlinesEdit"
+﻿<mpc:BaseMetroWindow x:Class="mpPlinesEdit.PlinesEdit"
                       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                      xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
-                      xmlns:decorators="clr-namespace:ModPlusAPI.Windows.Helpers.Decorators;assembly=ModPlusAPI"
-                      WindowStartupLocation="CenterScreen" SizeToContent="WidthAndHeight"
-                      ShowIconOnTitleBar="False" ShowMaxRestoreButton="False"
-                      ShowMinButton="False" ShowSystemMenuOnRightClick="False" ShowTitleBar="False"
-                      WindowStyle="None" Topmost="True" ResizeMode="NoResize"
+                      xmlns:mpc="clr-namespace:ModPlusAPI.Windows.Mpc;assembly=ModPlusAPI"
+                      SizeToContent="WidthAndHeight"
+                      ShowIconOnTitleBar="False"
+                      ShowSystemMenuOnRightClick="False"
+                      Topmost="True" ResizeMode="NoResize"
                       Title="mpPliensEdit">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/ModPlusAPI;component/Windows/WinResources/Styles.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="pack://application:,,,/ModPlusAPI;component/Windows/WinResources/Styles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <BooleanToVisibilityConverter x:Key="BoolToVis" />
             <XmlDataProvider x:Key="Lang" Source="E:/ModPlus/Languages/en-US.xml" XPath="ModPlus/mpPlinesEdit"></XmlDataProvider>
         </ResourceDictionary>
     </Window.Resources>
-    <Grid Margin="5">
+    <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
@@ -34,14 +26,9 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.Row="0" FontSize="16" Margin="0,0,20,5"
-                   Text="{Binding Source={StaticResource Lang}, XPath=h1}"
-                   Grid.Column="0" Grid.ColumnSpan="2"
-                   MouseLeftButtonDown="UIElement_OnMouseLeftButtonDown"></TextBlock>
-        <ListView Grid.Row="1" Name="LvFunctions" Margin="2,4,2,2"
+        <ListView Grid.Row="0" Name="LvFunctions" Margin="2,4,2,2"
                   Grid.Column="0" Grid.ColumnSpan="3" Height="300"
-                  BorderThickness="1" BorderBrush="{StaticResource AccentBaseColorBrush}"
-                  >
+                  BorderThickness="1" BorderBrush="{StaticResource AccentBaseColorBrush}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Button Tag="{Binding Name}" Click="FunctionButton_OnClick"
@@ -62,10 +49,9 @@
                                     Margin="2,2,5,2" VerticalAlignment="Center"
                                     BorderBrush="{StaticResource BlackBrush}"
                                     BorderThickness="1" Padding="2" Background="White">
-                            <decorators:DevicePixels>
-                                <Image Width="32" Height="32" Stretch="UniformToFill"
-                                       Source="{Binding ImageBig}"></Image>
-                            </decorators:DevicePixels>
+                            <Image Width="32" Height="32" Stretch="UniformToFill"
+                                   Source="{Binding ImageBig}"
+                                   RenderOptions.BitmapScalingMode="HighQuality"></Image>
                             </Border>
                             <TextBlock Grid.Row="0" Grid.Column="1" FontSize="12" FontWeight="SemiBold"
                                    Foreground="{StaticResource AccentColorBrush}"
@@ -95,19 +81,21 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <CheckBox Grid.Row="2" Margin="2" Name="ChkRibbon"
+        <CheckBox Grid.Row="1" Margin="2" Name="ChkRibbon"
                   Checked="ChkRibbon_OnChecked"
                   Unchecked="ChkRibbon_OnUnchecked"
                   Grid.Column="0" HorizontalAlignment="Left"
                   Content="{Binding Source={StaticResource Lang}, XPath=h5}"></CheckBox>
-        <TextBlock Grid.Column="1" Grid.Row="2" Margin="2"
+        <TextBlock Grid.Column="1" Grid.Row="1" Margin="2"
                    HorizontalAlignment="Right"
                    Text="{Binding Source={StaticResource Lang}, XPath=h6}"
                    VerticalAlignment="Center"></TextBlock>
-        <Button Grid.Row="2" Grid.Column="2" Margin="2"
+        <Button Grid.Row="1" Grid.Column="2" Margin="2"
                 Name="BtColor" Click="BtColor_OnClick" VerticalAlignment="Center"
                 Content=" " HorizontalAlignment="Center">
         </Button>
     </Grid>
-</controls:MetroWindow>
+</mpc:BaseMetroWindow>
+
+
 

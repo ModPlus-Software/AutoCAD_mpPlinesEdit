@@ -1,28 +1,20 @@
-﻿<controls:MetroWindow x:Class="mpPlinesEdit.Help.NoArcSettings"
+﻿<mpc:BaseMetroWindow x:Class="mpPlinesEdit.Help.NoArcSettings"
                       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                      xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
-                      xmlns:decorators="clr-namespace:ModPlusAPI.Windows.Helpers.Decorators;assembly=ModPlusAPI"
-                      WindowStartupLocation="CenterScreen" SizeToContent="WidthAndHeight"
-                      ShowCloseButton="False" ShowIconOnTitleBar="False" ShowMaxRestoreButton="False"
-                      ShowMinButton="False" ShowSystemMenuOnRightClick="False" ShowTitleBar="False"
+                      xmlns:mpc="clr-namespace:ModPlusAPI.Windows.Mpc;assembly=ModPlusAPI"
+                      SizeToContent="WidthAndHeight"
+                      ShowCloseButton="False" ShowSystemMenuOnRightClick="False" TitlebarHeight="0"
                       WindowStyle="None" Topmost="True" ResizeMode="NoResize"
                       Loaded="NoArcSettings_OnLoaded">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/ModPlusAPI;component/Windows/WinResources/Styles.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="pack://application:,,,/ModPlusAPI;component/Windows/WinResources/Styles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <XmlDataProvider x:Key="Lang" Source="E:/ModPlus/Languages/en-US.xml" XPath="ModPlus/mpPlinesEdit"/>
         </ResourceDictionary>
     </Window.Resources>
-    <Grid Margin="5">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
@@ -54,14 +46,13 @@
                  Text="{Binding Source={StaticResource Lang}, XPath=h12}"
                  VerticalAlignment="Center" Name="TbMinRadius"></TextBox>
         <Border Grid.Row="0" Grid.Column="2" Grid.RowSpan="4">
-            <decorators:DevicePixels>
-                <Image Margin="5" Name="Img" Stretch="Uniform" Width="255"></Image>
-            </decorators:DevicePixels>
+            <Image Margin="5" Name="Img" Stretch="Uniform" Width="255"
+                   RenderOptions.BitmapScalingMode="HighQuality"></Image>
         </Border>
         <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Vertical">
             <GridSplitter BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="0,1,0,0"
                           Margin="2" HorizontalAlignment="Stretch"></GridSplitter>
-            <TextBlock Name="TbDescr" MaxWidth="380" TextWrapping="Wrap"
+            <TextBlock Name="TbDescr" Width="380" TextWrapping="Wrap"
                        HorizontalAlignment="Left"></TextBlock>
         </StackPanel>
         <Grid Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3">
@@ -80,5 +71,7 @@
         </Grid>
 
     </Grid>
-</controls:MetroWindow>
+</mpc:BaseMetroWindow>
+
+
 

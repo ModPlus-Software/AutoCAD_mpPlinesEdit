@@ -3,7 +3,6 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using ModPlusAPI.Windows.Helpers;
 
 namespace mpPlinesEdit.Help
 {
@@ -12,7 +11,7 @@ namespace mpPlinesEdit.Help
         public VxCollinHelp()
         {
             InitializeComponent();
-            this.OnWindowStartUp();
+            Title = ModPlusAPI.Language.GetItem("mpPlinesEdit", "h21");
         }
 
         private void BtOk_OnClick(object sender, RoutedEventArgs e)

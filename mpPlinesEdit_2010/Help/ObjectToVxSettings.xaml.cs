@@ -11,7 +11,7 @@ namespace mpPlinesEdit.Help
         public ObjectToVxSettings()
         {
             InitializeComponent();
-            this.OnWindowStartUp();
+            
             ChkExcludeFirstAndLastPt.IsChecked =
                 bool.TryParse(UserConfigFile.GetValue(UserConfigFile.ConfigFileZone.Settings, "PlObjectToVx", "ExcludeFirstAndLast"), out var b) && b;
             CbCopyBlockBy.SelectedIndex =

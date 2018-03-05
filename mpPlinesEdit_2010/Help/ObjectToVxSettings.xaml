@@ -1,26 +1,19 @@
-﻿<controls:MetroWindow x:Class="mpPlinesEdit.Help.ObjectToVxSettings"
+﻿<mpc:BaseMetroWindow x:Class="mpPlinesEdit.Help.ObjectToVxSettings"
                       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                      xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
-                      WindowStartupLocation="CenterScreen" SizeToContent="WidthAndHeight"
-                      ShowCloseButton="False" ShowIconOnTitleBar="False" ShowMaxRestoreButton="False"
-                      ShowMinButton="False" ShowSystemMenuOnRightClick="False" ShowTitleBar="False"
+                      xmlns:mpc="clr-namespace:ModPlusAPI.Windows.Mpc;assembly=ModPlusAPI"
+                      SizeToContent="WidthAndHeight"
+                      ShowCloseButton="False" ShowSystemMenuOnRightClick="False" TitlebarHeight="0"
                       WindowStyle="None" Topmost="True" ResizeMode="NoResize">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/ModPlusAPI;component/Windows/WinResources/Styles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <XmlDataProvider x:Key="Lang" Source="E:/ModPlus/Languages/en-US.xml" XPath="ModPlus/mpPlinesEdit"/>
         </ResourceDictionary>
     </Window.Resources>
-    <Grid Margin="5">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
@@ -30,7 +23,6 @@
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
-        
         <CheckBox Grid.Row="0" Grid.Column="0" Margin="2"
                   Name="ChkExcludeFirstAndLastPt" Content="{Binding Source={StaticResource Lang}, XPath=h18}"
                   Checked="ChkExcludeFirstAndLastPt_OnChecked"
@@ -94,4 +86,5 @@
                 Name="BtCancel" Click="BtCancel_OnClick"></Button>
         </Grid>
     </Grid>
-</controls:MetroWindow>
+</mpc:BaseMetroWindow>
+
