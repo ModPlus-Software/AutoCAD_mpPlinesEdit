@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F7149691-2932-4B0C-8EE0-05B68C76F7ED}</ProjectGuid>
+    <ProjectGuid>{FB5D6D99-D7F1-437A-AD50-5EB8B5055DAD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>mpPlinesEdit</RootNamespace>
-    <AssemblyName>mpPlinesEdit_2016</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <AssemblyName>mpPlinesEdit_2019</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -31,19 +31,19 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="accoremgd">
-      <HintPath>..\..\..\..\_Acad dlls\2016\accoremgd.dll</HintPath>
+      <HintPath>..\..\..\..\_Acad dlls\2019\accoremgd.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="acdbmgd">
-      <HintPath>..\..\..\..\_Acad dlls\2016\acdbmgd.dll</HintPath>
+      <HintPath>..\..\..\..\_Acad dlls\2019\acdbmgd.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="acmgd">
-      <HintPath>..\..\..\..\_Acad dlls\2016\acmgd.dll</HintPath>
+      <HintPath>..\..\..\..\_Acad dlls\2019\acmgd.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="AdWindows">
-      <HintPath>..\..\..\..\_Acad dlls\2016\AdWindows.dll</HintPath>
+      <HintPath>..\..\..\..\_Acad dlls\2019\AdWindows.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="MahApps.Metro">
@@ -54,21 +54,32 @@
       <HintPath>..\..\..\..\..\..\..\ModPlus\Extensions\ModPlusAPI.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="ModPlus_2016">
-      <HintPath>..\..\..\..\..\..\..\ModPlus\Extensions\ModPlus_2016.dll</HintPath>
+    <Reference Include="ModPlus_2019">
+      <HintPath>..\..\..\..\..\..\..\ModPlus\Extensions\ModPlus_2019.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
-    <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
+    <!--
+    
+    <Reference Include="System.Core"/>
+    <Reference Include="System.Xml.Linq"/>
+    <Reference Include="System.Data.DataSetExtensions"/>
+    
+    
+    <Reference Include="Microsoft.CSharp"/>
+    
+    <Reference Include="System.Data"/>
+    
+    <Reference Include="System.Net.Http"/>
+    
+    <Reference Include="System.Xml"/>
+	-->
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\mpPlinesEdit_2010\Help\NoArcSettings.xaml.cs">
@@ -140,6 +151,12 @@
     <Resource Include="..\mpPlinesEdit_2010\Icons\mpPl-Line2Arc_32x32.png">
       <Link>Icons\mpPl-Line2Arc_32x32.png</Link>
     </Resource>
+    <Resource Include="..\mpPlinesEdit_2010\Icons\mpPl-MiddleLine_16x16.png">
+      <Link>Icons\mpPl-MiddleLine_16x16.png</Link>
+    </Resource>
+    <Resource Include="..\mpPlinesEdit_2010\Icons\mpPl-MiddleLine_32x32.png">
+      <Link>Icons\mpPl-MiddleLine_32x32.png</Link>
+    </Resource>
     <Resource Include="..\mpPlinesEdit_2010\Icons\mpPl-NoArc_16x16.png">
       <Link>Icons\mpPl-NoArc_16x16.png</Link>
     </Resource>
@@ -195,14 +212,6 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="..\mpPlinesEdit_2010\Icons\mpPl-MiddleLine_16x16.png">
-      <Link>Icons\mpPl-MiddleLine_16x16.png</Link>
-    </Resource>
-    <Resource Include="..\mpPlinesEdit_2010\Icons\mpPl-MiddleLine_32x32.png">
-      <Link>Icons\mpPl-MiddleLine_32x32.png</Link>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="..\mpPlinesEdit_2010\Resources\mpPlinesEdit_16x16.png">
       <Link>Resources\mpPlinesEdit_16x16.png</Link>
     </Resource>
@@ -211,11 +220,4 @@
     </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>
