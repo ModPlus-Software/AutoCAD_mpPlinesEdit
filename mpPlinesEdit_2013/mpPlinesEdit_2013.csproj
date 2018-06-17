@@ -18,7 +18,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>..\..\..\..\..\..\..\ModPlus\Functions\mpPlinesEdit\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;ac2013</DefineConstants>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
@@ -27,26 +27,26 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>..\..\..\..\..\..\..\ModPlus\Functions\mpPlinesEdit\</OutputPath>
-    <DefineConstants>TRACE;ac2013</DefineConstants>
+    <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="accoremgd">
-      <HintPath>..\..\..\..\_Acad dlls\2013\accoremgd.dll</HintPath>
+      <HintPath>C:\_Acad dlls\2013\accoremgd.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="acdbmgd">
-      <HintPath>..\..\..\..\_Acad dlls\2013\acdbmgd.dll</HintPath>
+      <HintPath>C:\_Acad dlls\2013\acdbmgd.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="acmgd">
-      <HintPath>..\..\..\..\_Acad dlls\2013\acmgd.dll</HintPath>
+      <HintPath>C:\_Acad dlls\2013\acmgd.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="AdWindows">
-      <HintPath>..\..\..\..\_Acad dlls\2013\AdWindows.dll</HintPath>
+      <HintPath>C:\_Acad dlls\2013\AdWindows.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="MahApps.Metro">
@@ -65,153 +65,107 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\mpPlinesEdit_2010\Help\NoArcSettings.xaml.cs">
-      <Link>Help\NoArcSettings.xaml.cs</Link>
-      <DependentUpon>NoArcSettings.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="..\mpPlinesEdit_2010\Help\ObjectToVxSettings.xaml.cs">
-      <Link>Help\ObjectToVxSettings.xaml.cs</Link>
-      <DependentUpon>ObjectToVxSettings.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="..\mpPlinesEdit_2010\Help\VxCollinHelp.xaml.cs">
-      <Link>Help\VxCollinHelp.xaml.cs</Link>
+    <Compile Include="Help\VxCollinHelp.xaml.cs">
       <DependentUpon>VxCollinHelp.xaml</DependentUpon>
     </Compile>
-    <Compile Include="..\mpPlinesEdit_2010\MpPlines.cs">
-      <Link>MpPlines.cs</Link>
+    <Compile Include="Interface.cs" />
+    <Compile Include="MpPlines.cs" />
+    <Compile Include="Help\NoArcSettings.xaml.cs">
+      <DependentUpon>NoArcSettings.xaml</DependentUpon>
     </Compile>
-    <Compile Include="..\mpPlinesEdit_2010\PlinesEdit.xaml.cs">
-      <Link>PlinesEdit.xaml.cs</Link>
+    <Compile Include="PlinesEdit.xaml.cs">
       <DependentUpon>PlinesEdit.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Interface.cs" />
+    <Compile Include="Help\ObjectToVxSettings.xaml.cs">
+      <DependentUpon>ObjectToVxSettings.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="..\mpPlinesEdit_2010\Help\NoArcSettings.xaml">
-      <Link>Help\NoArcSettings.xaml</Link>
+    <Page Include="Help\VxCollinHelp.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\mpPlinesEdit_2010\Help\ObjectToVxSettings.xaml">
-      <Link>Help\ObjectToVxSettings.xaml</Link>
+    <Page Include="Help\NoArcSettings.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\mpPlinesEdit_2010\Help\VxCollinHelp.xaml">
-      <Link>Help\VxCollinHelp.xaml</Link>
+    <Page Include="PlinesEdit.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\mpPlinesEdit_2010\PlinesEdit.xaml">
-      <Link>PlinesEdit.xaml</Link>
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Help\ObjectToVxSettings.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="..\mpPlinesEdit_2010\Icons\mpPl-3Dto2D_16x16.png">
-      <Link>Icons\mpPl-3Dto2D_16x16.png</Link>
-    </Resource>
-    <Resource Include="..\mpPlinesEdit_2010\Icons\mpPl-3Dto2D_32x32.png">
-      <Link>Icons\mpPl-3Dto2D_32x32.png</Link>
-    </Resource>
-    <Resource Include="..\mpPlinesEdit_2010\Icons\mpPl-AddVertex_16x16.png">
-      <Link>Icons\mpPl-AddVertex_16x16.png</Link>
-    </Resource>
-    <Resource Include="..\mpPlinesEdit_2010\Icons\mpPl-AddVertex_32x32.png">
-      <Link>Icons\mpPl-AddVertex_32x32.png</Link>
-    </Resource>
-    <Resource Include="..\mpPlinesEdit_2010\Icons\mpPl-Arc2Line_16x16.png">
-      <Link>Icons\mpPl-Arc2Line_16x16.png</Link>
-    </Resource>
-    <Resource Include="..\mpPlinesEdit_2010\Icons\mpPl-Arc2Line_32x32.png">
-      <Link>Icons\mpPl-Arc2Line_32x32.png</Link>
-    </Resource>
-    <Resource Include="..\mpPlinesEdit_2010\Icons\mpPl-Line2Arc_16x16.png">
-      <Link>Icons\mpPl-Line2Arc_16x16.png</Link>
-    </Resource>
-    <Resource Include="..\mpPlinesEdit_2010\Icons\mpPl-Line2Arc_32x32.png">
-      <Link>Icons\mpPl-Line2Arc_32x32.png</Link>
-    </Resource>
-    <Resource Include="..\mpPlinesEdit_2010\Icons\mpPl-NoArc_16x16.png">
-      <Link>Icons\mpPl-NoArc_16x16.png</Link>
-    </Resource>
-    <Resource Include="..\mpPlinesEdit_2010\Icons\mpPl-NoArc_32x32.png">
-      <Link>Icons\mpPl-NoArc_32x32.png</Link>
-    </Resource>
-    <Resource Include="..\mpPlinesEdit_2010\Icons\mpPl-ObjectToVx_16x16.png">
-      <Link>Icons\mpPl-ObjectToVx_16x16.png</Link>
-    </Resource>
-    <Resource Include="..\mpPlinesEdit_2010\Icons\mpPl-ObjectToVx_32x32.png">
-      <Link>Icons\mpPl-ObjectToVx_32x32.png</Link>
-    </Resource>
-    <Resource Include="..\mpPlinesEdit_2010\Icons\mpPl-Rect3Pt_16x16.png">
-      <Link>Icons\mpPl-Rect3Pt_16x16.png</Link>
-    </Resource>
-    <Resource Include="..\mpPlinesEdit_2010\Icons\mpPl-Rect3Pt_32x32.png">
-      <Link>Icons\mpPl-Rect3Pt_32x32.png</Link>
-    </Resource>
-    <Resource Include="..\mpPlinesEdit_2010\Icons\mpPl-VxCollin_16x16.png">
-      <Link>Icons\mpPl-VxCollin_16x16.png</Link>
-    </Resource>
-    <Resource Include="..\mpPlinesEdit_2010\Icons\mpPl-VxCollin_32x32.png">
-      <Link>Icons\mpPl-VxCollin_32x32.png</Link>
-    </Resource>
-    <Resource Include="..\mpPlinesEdit_2010\Icons\mpPl-VxMatchRemove_16x16.png">
-      <Link>Icons\mpPl-VxMatchRemove_16x16.png</Link>
-    </Resource>
-    <Resource Include="..\mpPlinesEdit_2010\Icons\mpPl-VxMatchRemove_32x32.png">
-      <Link>Icons\mpPl-VxMatchRemove_32x32.png</Link>
-    </Resource>
+    <Resource Include="Images\ObjToVx_obj.png" />
+    <Resource Include="Images\ObjToVx_pline.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="..\mpPlinesEdit_2010\Images\NoArc1.png">
-      <Link>Images\NoArc1.png</Link>
-    </Resource>
-    <Resource Include="..\mpPlinesEdit_2010\Images\NoArc2.png">
-      <Link>Images\NoArc2.png</Link>
-    </Resource>
-    <Resource Include="..\mpPlinesEdit_2010\Images\NoArc3.png">
-      <Link>Images\NoArc3.png</Link>
-    </Resource>
-    <Resource Include="..\mpPlinesEdit_2010\Images\NoArc4.png">
-      <Link>Images\NoArc4.png</Link>
-    </Resource>
-    <Resource Include="..\mpPlinesEdit_2010\Images\ObjToVx_obj.png">
-      <Link>Images\ObjToVx_obj.png</Link>
-    </Resource>
-    <Resource Include="..\mpPlinesEdit_2010\Images\ObjToVx_pline.png">
-      <Link>Images\ObjToVx_pline.png</Link>
-    </Resource>
-    <Resource Include="..\mpPlinesEdit_2010\Images\VxCollin_Help.png">
-      <Link>Images\VxCollin_Help.png</Link>
-    </Resource>
+    <Resource Include="Images\VxCollin_Help.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="..\mpPlinesEdit_2010\Icons\mpPl-MiddleLine_16x16.png">
-      <Link>Icons\mpPl-MiddleLine_16x16.png</Link>
-    </Resource>
-    <Resource Include="..\mpPlinesEdit_2010\Icons\mpPl-MiddleLine_32x32.png">
-      <Link>Icons\mpPl-MiddleLine_32x32.png</Link>
-    </Resource>
+    <Resource Include="Images\NoArc1.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="..\mpPlinesEdit_2010\Resources\mpPlinesEdit_16x16.png">
-      <Link>Resources\mpPlinesEdit_16x16.png</Link>
-    </Resource>
-    <Resource Include="..\mpPlinesEdit_2010\Resources\mpPlinesEdit_32x32.png">
-      <Link>Resources\mpPlinesEdit_32x32.png</Link>
-    </Resource>
+    <Resource Include="Images\NoArc2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\NoArc3.png" />
+    <Resource Include="Images\NoArc4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\mpPl-3Dto2D_16x16.png" />
+    <Resource Include="Icons\mpPl-3Dto2D_32x32.png" />
+    <Resource Include="Icons\mpPl-AddVertex_16x16.png" />
+    <Resource Include="Icons\mpPl-AddVertex_32x32.png" />
+    <Resource Include="Icons\mpPl-Arc2Line_16x16.png" />
+    <Resource Include="Icons\mpPl-Arc2Line_32x32.png" />
+    <Resource Include="Icons\mpPl-Line2Arc_16x16.png" />
+    <Resource Include="Icons\mpPl-Line2Arc_32x32.png" />
+    <Resource Include="Icons\mpPl-NoArc_16x16.png" />
+    <Resource Include="Icons\mpPl-NoArc_32x32.png" />
+    <Resource Include="Icons\mpPl-ObjectToVx_16x16.png" />
+    <Resource Include="Icons\mpPl-ObjectToVx_32x32.png" />
+    <Resource Include="Icons\mpPl-Rect3Pt_16x16.png" />
+    <Resource Include="Icons\mpPl-Rect3Pt_32x32.png" />
+    <Resource Include="Icons\mpPl-VxCollin_16x16.png" />
+    <Resource Include="Icons\mpPl-VxCollin_32x32.png" />
+    <Resource Include="Icons\mpPl-VxMatchRemove_16x16.png" />
+    <Resource Include="Icons\mpPl-VxMatchRemove_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\mpPlinesEdit_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\mpPlinesEdit_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\mpPl-MiddleLine_16x16.png" />
+    <Resource Include="Icons\mpPl-MiddleLine_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\mpPlinesEdit_16x16_dark.png" />
+    <Resource Include="Resources\mpPlinesEdit_32x32_dark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\mpPl-3Dto2D_16x16_dark.png" />
+    <Resource Include="Icons\mpPl-AddVertex_16x16_dark.png" />
+    <Resource Include="Icons\mpPl-Arc2Line_16x16_dark.png" />
+    <Resource Include="Icons\mpPl-Line2Arc_16x16_dark.png" />
+    <Resource Include="Icons\mpPl-MiddleLine_16x16_dark.png" />
+    <Resource Include="Icons\mpPl-NoArc_16x16_dark.png" />
+    <Resource Include="Icons\mpPl-ObjectToVx_16x16_dark.png" />
+    <Resource Include="Icons\mpPl-Rect3Pt_16x16_dark.png" />
+    <Resource Include="Icons\mpPl-VxCollin_16x16_dark.png" />
+    <Resource Include="Icons\mpPl-VxMatchRemove_16x16_dark.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

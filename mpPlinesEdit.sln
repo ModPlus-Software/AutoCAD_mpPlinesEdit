@@ -3,12 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2002
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mpPlinesEdit_2010", "mpPlinesEdit_2010\mpPlinesEdit_2010.csproj", "{DECD687F-CC3A-4720-873E-3401F905EB63}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mpPlinesEdit_2011", "mpPlinesEdit_2011\mpPlinesEdit_2011.csproj", "{3BCDB40B-6813-40DF-929D-BD3CDCB2A298}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mpPlinesEdit_2012", "mpPlinesEdit_2012\mpPlinesEdit_2012.csproj", "{A3BEAD1B-84E2-4659-B6CA-7FF0ED3DDFBE}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mpPlinesEdit_2013", "mpPlinesEdit_2013\mpPlinesEdit_2013.csproj", "{34EAC410-A36A-415C-8739-6E910C35064A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mpPlinesEdit_2014", "mpPlinesEdit_2014\mpPlinesEdit_2014.csproj", "{FADB4044-FBD9-4DE9-9B21-4463057CA638}"
@@ -29,18 +23,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{DECD687F-CC3A-4720-873E-3401F905EB63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DECD687F-CC3A-4720-873E-3401F905EB63}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DECD687F-CC3A-4720-873E-3401F905EB63}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DECD687F-CC3A-4720-873E-3401F905EB63}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3BCDB40B-6813-40DF-929D-BD3CDCB2A298}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3BCDB40B-6813-40DF-929D-BD3CDCB2A298}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3BCDB40B-6813-40DF-929D-BD3CDCB2A298}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3BCDB40B-6813-40DF-929D-BD3CDCB2A298}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A3BEAD1B-84E2-4659-B6CA-7FF0ED3DDFBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A3BEAD1B-84E2-4659-B6CA-7FF0ED3DDFBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A3BEAD1B-84E2-4659-B6CA-7FF0ED3DDFBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A3BEAD1B-84E2-4659-B6CA-7FF0ED3DDFBE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{34EAC410-A36A-415C-8739-6E910C35064A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{34EAC410-A36A-415C-8739-6E910C35064A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{34EAC410-A36A-415C-8739-6E910C35064A}.Release|Any CPU.ActiveCfg = Release|Any CPU
