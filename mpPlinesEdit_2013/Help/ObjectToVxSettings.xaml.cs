@@ -2,7 +2,6 @@
 using System.Windows.Controls;
 using System.Windows.Media;
 using ModPlusAPI;
-using ModPlusAPI.Windows.Helpers;
 
 namespace mpPlinesEdit.Help
 {

@@ -3,7 +3,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using ModPlusAPI.Windows;
-using ModPlusAPI.Windows.Helpers;
 
 namespace mpPlinesEdit.Help
 {
@@ -14,7 +13,6 @@ namespace mpPlinesEdit.Help
         public NoArcSettings()
         {
             InitializeComponent();
-            this.OnWindowStartUp();
         }
 
         private void BtOk_OnClick(object sender, RoutedEventArgs e)

@@ -285,25 +285,21 @@ namespace mpPlinesEdit
                          {
                              TbMaxA =
                              {
-                                 Text = double.TryParse(ModPlus.Helpers.XDataHelpers.GetStringXData("mpPl_VxCollin_maxA"),
-                                     out var d)
-                                     ? d.ToString(CultureInfo.InvariantCulture)
-                                     : "0.0"
+                                 Value = double.TryParse(ModPlus.Helpers.XDataHelpers.GetStringXData("mpPl_VxCollin_maxA"),
+                                     out var d) ? d : 0.0
                              },
                              TbMaxH =
                              {
-                                 Text = double.TryParse(ModPlus.Helpers.XDataHelpers.GetStringXData("mpPl_VxCollin_maxH"),
-                                     out d)
-                                     ? d.ToString(CultureInfo.InvariantCulture)
-                                     : "0.0"
+                                 Value = double.TryParse(ModPlus.Helpers.XDataHelpers.GetStringXData("mpPl_VxCollin_maxH"),
+                                     out d) ? d : 0.0
                              }
                          };
                          if (win.ShowDialog() == true)
                          {
-                             maxH = double.TryParse(win.TbMaxH.Text, out d) ? d : 0.0;
+                             maxH = win.TbMaxH.Value ?? 0.0;
                              ModPlus.Helpers.XDataHelpers.SetStringXData("mpPl_VxCollin_maxH", maxH.ToString(CultureInfo.InvariantCulture));
                              ed.WriteMessage("\n" + Language.GetItem(LangItem, "k8") + ":" + maxH);
-                             maxA = double.TryParse(win.TbMaxA.Text, out d) ? d : 0.0;
+                             maxA = win.TbMaxA.Value ?? 0.0;
                              ModPlus.Helpers.XDataHelpers.SetStringXData("mpPl_VxCollin_maxA", maxA.ToString(CultureInfo.InvariantCulture));
                              ed.WriteMessage("\n" + Language.GetItem(LangItem, "k9") + ":" + maxA);
                          }
