@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27004.2002
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28729.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mpPlinesEdit_2013", "mpPlinesEdit_2013\mpPlinesEdit_2013.csproj", "{34EAC410-A36A-415C-8739-6E910C35064A}"
 EndProject
@@ -16,6 +16,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mpPlinesEdit_2018", "mpPlinesEdit_2018\mpPlinesEdit_2018.csproj", "{70255EFB-FDE5-49BC-8585-C34C81A1613A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mpPlinesEdit_2019", "mpPlinesEdit_2019\mpPlinesEdit_2019.csproj", "{FB5D6D99-D7F1-437A-AD50-5EB8B5055DAD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mpPlinesEdit_2020", "mpPlinesEdit_2020\mpPlinesEdit_2020.csproj", "{9B7F3B4A-47A9-4AAC-81CD-E2333D09F6CB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{FB5D6D99-D7F1-437A-AD50-5EB8B5055DAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB5D6D99-D7F1-437A-AD50-5EB8B5055DAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB5D6D99-D7F1-437A-AD50-5EB8B5055DAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B7F3B4A-47A9-4AAC-81CD-E2333D09F6CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B7F3B4A-47A9-4AAC-81CD-E2333D09F6CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B7F3B4A-47A9-4AAC-81CD-E2333D09F6CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B7F3B4A-47A9-4AAC-81CD-E2333D09F6CB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

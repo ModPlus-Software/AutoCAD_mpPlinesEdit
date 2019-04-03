@@ -33,7 +33,7 @@ namespace mpPlinesEdit
         [CommandMethod("ModPlus", "mpPl-3Dto2D", CommandFlags.UsePickSet)]
         public static void mpPl_3Dto2D()
         {
-            Statistic.SendCommandStarting(new Interface());
+            Statistic.SendCommandStarting(new ModPlusConnector());
             var doc = AcApp.DocumentManager.MdiActiveDocument;
             var db = doc.Database;
             var ed = doc.Editor;
@@ -101,7 +101,7 @@ namespace mpPlinesEdit
         [CommandMethod("ModPlus", "mpPl-VxMatchRemove", CommandFlags.UsePickSet)]
         public static void mpPl_VxMatchRemove()
         {
-            Statistic.SendCommandStarting(new Interface());
+            Statistic.SendCommandStarting(new ModPlusConnector());
             try
             {
                 var doc = AcApp.DocumentManager.MdiActiveDocument;
@@ -261,7 +261,7 @@ namespace mpPlinesEdit
         [CommandMethod("ModPlus", "mpPl-VxCollin", CommandFlags.UsePickSet)]
         public static void mpPl_VxCollin()
         {
-            Statistic.SendCommandStarting(new Interface());
+            Statistic.SendCommandStarting(new ModPlusConnector());
             var doc = AcApp.DocumentManager.MdiActiveDocument;
             var db = doc.Database;
             var ed = doc.Editor;
@@ -561,7 +561,7 @@ namespace mpPlinesEdit
         [CommandMethod("ModPlus", "mpPl-ObjectToVx", CommandFlags.UsePickSet)]
         public static void mpPl_ObjectToVx()
         {
-            Statistic.SendCommandStarting(new Interface());
+            Statistic.SendCommandStarting(new ModPlusConnector());
             try
             {
                 var doc = AcApp.DocumentManager.MdiActiveDocument;
@@ -759,7 +759,7 @@ namespace mpPlinesEdit
         [CommandMethod("ModPlus", "mpPl-Arc2Line", CommandFlags.UsePickSet)]
         public static void mpPl_Arc2Line()
         {
-            Statistic.SendCommandStarting(new Interface());
+            Statistic.SendCommandStarting(new ModPlusConnector());
             var doc = AcApp.DocumentManager.MdiActiveDocument;
             var db = doc.Database;
             var ed = doc.Editor;
@@ -878,7 +878,7 @@ namespace mpPlinesEdit
         [CommandMethod("ModPlus", "mpPl-Line2Arc", CommandFlags.UsePickSet)]
         public static void mpPl_Line2Arc()
         {
-            Statistic.SendCommandStarting(new Interface());
+            Statistic.SendCommandStarting(new ModPlusConnector());
             try
             {
                 var doc = AcApp.DocumentManager.MdiActiveDocument;
@@ -1056,7 +1056,7 @@ namespace mpPlinesEdit
         [CommandMethod("ModPlus", "mpPl-AddVertex", CommandFlags.UsePickSet)]
         public static void mpPl_AddVertex()
         {
-            Statistic.SendCommandStarting(new Interface());
+            Statistic.SendCommandStarting(new ModPlusConnector());
             try
             {
                 var doc = AcApp.DocumentManager.MdiActiveDocument;
@@ -1231,7 +1231,7 @@ namespace mpPlinesEdit
         [CommandMethod("ModPlus", "mpPl-Rect3Pt", CommandFlags.Redraw)]
         public static void mpPl_Rect3Pt()
         {
-            Statistic.SendCommandStarting(new Interface());
+            Statistic.SendCommandStarting(new ModPlusConnector());
             try
             {
                 var doc = AcApp.DocumentManager.MdiActiveDocument;
@@ -1396,7 +1396,7 @@ namespace mpPlinesEdit
         [SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
         public static void mpPl_NoArc()
         {
-            Statistic.SendCommandStarting(new Interface());
+            Statistic.SendCommandStarting(new ModPlusConnector());
             try
             {
                 var doc = AcApp.DocumentManager.MdiActiveDocument;
@@ -1763,7 +1763,7 @@ namespace mpPlinesEdit
         [CommandMethod("ModPlus", "mpPl-MiddleLine", CommandFlags.Session)]
         public static void mpPl_MiddleLine()
         {
-            Statistic.SendCommandStarting(new Interface());
+            Statistic.SendCommandStarting(new ModPlusConnector());
             var doc = AcApp.DocumentManager.MdiActiveDocument;
             var db = doc.Database;
             var ed = doc.Editor;

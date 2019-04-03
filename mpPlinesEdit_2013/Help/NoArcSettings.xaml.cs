@@ -36,7 +36,7 @@ namespace mpPlinesEdit.Help
                         case 0:
                             var image = new BitmapImage();
                             image.BeginInit();
-                            image.UriSource = new Uri("pack://application:,,,/mpPlinesEdit_" + VersionData.FuncVersion + ";component/Images/NoArc1.png");
+                            image.UriSource = new Uri("pack://application:,,,/mpPlinesEdit_" + ModPlusConnector.Instance.AvailProductExternalVersion + ";component/Images/NoArc1.png");
                             image.EndInit();
                             Img.Source = image;
                             TbDescr.Text = ModPlusAPI.Language.GetItem(LangItem, "h13");
@@ -44,7 +44,7 @@ namespace mpPlinesEdit.Help
                         case 1:
                             image = new BitmapImage();
                             image.BeginInit();
-                            image.UriSource = new Uri("pack://application:,,,/mpPlinesEdit_" + VersionData.FuncVersion + ";component/Images/NoArc2.png");
+                            image.UriSource = new Uri("pack://application:,,,/mpPlinesEdit_" + ModPlusConnector.Instance.AvailProductExternalVersion + ";component/Images/NoArc2.png");
                             image.EndInit();
                             Img.Source = image;
                             TbDescr.Text = ModPlusAPI.Language.GetItem(LangItem, "h14");
@@ -52,7 +52,7 @@ namespace mpPlinesEdit.Help
                         case 2:
                             image = new BitmapImage();
                             image.BeginInit();
-                            image.UriSource = new Uri("pack://application:,,,/mpPlinesEdit_" + VersionData.FuncVersion + ";component/Images/NoArc3.png");
+                            image.UriSource = new Uri("pack://application:,,,/mpPlinesEdit_" + ModPlusConnector.Instance.AvailProductExternalVersion + ";component/Images/NoArc3.png");
                             image.EndInit();
                             Img.Source = image;
                             TbDescr.Text = ModPlusAPI.Language.GetItem(LangItem, "h15");
@@ -60,7 +60,7 @@ namespace mpPlinesEdit.Help
                         case 3:
                             image = new BitmapImage();
                             image.BeginInit();
-                            image.UriSource = new Uri("pack://application:,,,/mpPlinesEdit_" + VersionData.FuncVersion + ";component/Images/NoArc4.png");
+                            image.UriSource = new Uri("pack://application:,,,/mpPlinesEdit_" + ModPlusConnector.Instance.AvailProductExternalVersion + ";component/Images/NoArc4.png");
                             image.EndInit();
                             Img.Source = image;
                             TbDescr.Text = ModPlusAPI.Language.GetItem(LangItem, "h16");

@@ -281,11 +281,11 @@ namespace mpPlinesEdit
             foreach (var plinesFunction in list)
             {
                 plinesFunction.ImageBig = new BitmapImage(new Uri(
-                    "pack://application:,,,/mpPlinesEdit_" + VersionData.FuncVersion + ";component/Icons/" + plinesFunction.Name + "_32x32.png"));
+                    "pack://application:,,,/mpPlinesEdit_" + ModPlusConnector.Instance.AvailProductExternalVersion + ";component/Icons/" + plinesFunction.Name + "_32x32.png"));
                 plinesFunction.ImageSmall = new BitmapImage(new Uri(
-                    "pack://application:,,,/mpPlinesEdit_" + VersionData.FuncVersion + ";component/Icons/" + plinesFunction.Name + "_16x16.png"));
+                    "pack://application:,,,/mpPlinesEdit_" + ModPlusConnector.Instance.AvailProductExternalVersion + ";component/Icons/" + plinesFunction.Name + "_16x16.png"));
                 plinesFunction.ImageDarkSmall = new BitmapImage(new Uri(
-                    "pack://application:,,,/mpPlinesEdit_" + VersionData.FuncVersion + ";component/Icons/" + plinesFunction.Name + "_16x16_dark.png"));
+                    "pack://application:,,,/mpPlinesEdit_" + ModPlusConnector.Instance.AvailProductExternalVersion + ";component/Icons/" + plinesFunction.Name + "_16x16_dark.png"));
             }
             return list;
         }
@@ -293,7 +293,7 @@ namespace mpPlinesEdit
         [CommandMethod("ModPlus", "mpPlinesEdit", CommandFlags.Modal)]
         public static void Main()
         {
-            Statistic.SendCommandStarting(new Interface());
+            Statistic.SendCommandStarting(new ModPlusConnector());
             if (_win != null)
             {
                 _win.Activate();
