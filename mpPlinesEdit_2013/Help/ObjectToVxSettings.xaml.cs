@@ -1,29 +1,29 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
-using ModPlusAPI;
-
-namespace mpPlinesEdit.Help
+﻿namespace mpPlinesEdit.Help
 {
-    public partial class ObjectToVxSettings 
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Media;
+    using ModPlusAPI;
+
+    public partial class ObjectToVxSettings
     {
         public ObjectToVxSettings()
         {
             InitializeComponent();
-            
+
             ChkExcludeFirstAndLastPt.IsChecked =
-                bool.TryParse(UserConfigFile.GetValue(UserConfigFile.ConfigFileZone.Settings, "PlObjectToVx", "ExcludeFirstAndLast"), out var b) && b;
+                bool.TryParse(UserConfigFile.GetValue("PlObjectToVx", "ExcludeFirstAndLast"), out var b) && b;
             CbCopyBlockBy.SelectedIndex =
-                int.TryParse(UserConfigFile.GetValue(UserConfigFile.ConfigFileZone.Settings, "PlObjectToVx", "CopyBlockBy"), out var i) ? i : 0;
+                int.TryParse(UserConfigFile.GetValue("PlObjectToVx", "CopyBlockBy"), out var i) ? i : 0;
             CbRotateBy.SelectedIndex =
-                int.TryParse(UserConfigFile.GetValue(UserConfigFile.ConfigFileZone.Settings, "PlObjectToVx", "RotateBy"), out i) ? i : 0;
+                int.TryParse(UserConfigFile.GetValue("PlObjectToVx", "RotateBy"), out i) ? i : 0;
         }
 
         private void BtOk_OnClick(object sender, RoutedEventArgs e)
         {
-            UserConfigFile.SetValue(UserConfigFile.ConfigFileZone.Settings, "PlObjectToVx", "ExcludeFirstAndLast",(ChkExcludeFirstAndLastPt.IsChecked != null && ChkExcludeFirstAndLastPt.IsChecked.Value).ToString(), false);
-            UserConfigFile.SetValue(UserConfigFile.ConfigFileZone.Settings, "PlObjectToVx", "CopyBlockBy", CbCopyBlockBy.SelectedIndex.ToString(), false);
-            UserConfigFile.SetValue(UserConfigFile.ConfigFileZone.Settings, "PlObjectToVx", "RotateBy", CbRotateBy.SelectedIndex.ToString(), false);
+            UserConfigFile.SetValue("PlObjectToVx", "ExcludeFirstAndLast", ChkExcludeFirstAndLastPt.IsChecked.ToString(), false);
+            UserConfigFile.SetValue("PlObjectToVx", "CopyBlockBy", CbCopyBlockBy.SelectedIndex.ToString(), false);
+            UserConfigFile.SetValue("PlObjectToVx", "RotateBy", CbRotateBy.SelectedIndex.ToString(), false);
             UserConfigFile.SaveConfigFile();
             DialogResult = true;
         }
@@ -59,13 +59,13 @@ namespace mpPlinesEdit.Help
                 var rtLeft = new RotateTransform(-45);
                 var rtRight = new RotateTransform(45);
                 ImgLeft.RenderTransform = ImgObj1.RenderTransform = ImgObj3.RenderTransform = ImgRight.RenderTransform = rtLeft;
-                ImgObj2.RenderTransform =  rtRight;
+                ImgObj2.RenderTransform = rtRight;
             }
             else if (index.Equals(2))
             {
                 var rtLeft = new RotateTransform(-45);
                 var rtRight = new RotateTransform(45);
-                ImgLeft.RenderTransform = ImgObj3.RenderTransform  = ImgRight.RenderTransform = rtLeft;
+                ImgLeft.RenderTransform = ImgObj3.RenderTransform = ImgRight.RenderTransform = rtLeft;
                 ImgObj1.RenderTransform = ImgObj2.RenderTransform = rtRight;
             }
         }

@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <CodeAnalysisRuleSet>$(SolutionDir)\ModPlus.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="accoremgd">
       <HintPath>C:\_Acad dlls\2014\accoremgd.dll</HintPath>
@@ -70,6 +73,36 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\mpPlinesEdit_2013\Functions\ConvertSegmentArcToLine.cs">
+      <Link>Functions\ConvertSegmentArcToLine.cs</Link>
+    </Compile>
+    <Compile Include="..\mpPlinesEdit_2013\Functions\ConvertSegmentLineToArc.cs">
+      <Link>Functions\ConvertSegmentLineToArc.cs</Link>
+    </Compile>
+    <Compile Include="..\mpPlinesEdit_2013\Functions\ConvertThreeDto2D.cs">
+      <Link>Functions\ConvertThreeDto2D.cs</Link>
+    </Compile>
+    <Compile Include="..\mpPlinesEdit_2013\Functions\CreateMiddleLine.cs">
+      <Link>Functions\CreateMiddleLine.cs</Link>
+    </Compile>
+    <Compile Include="..\mpPlinesEdit_2013\Functions\CreateRectangleByThreePoint.cs">
+      <Link>Functions\CreateRectangleByThreePoint.cs</Link>
+    </Compile>
+    <Compile Include="..\mpPlinesEdit_2013\Functions\DynamicAddVertex.cs">
+      <Link>Functions\DynamicAddVertex.cs</Link>
+    </Compile>
+    <Compile Include="..\mpPlinesEdit_2013\Functions\PlaceObjectToVertex.cs">
+      <Link>Functions\PlaceObjectToVertex.cs</Link>
+    </Compile>
+    <Compile Include="..\mpPlinesEdit_2013\Functions\RemoveArcs.cs">
+      <Link>Functions\RemoveArcs.cs</Link>
+    </Compile>
+    <Compile Include="..\mpPlinesEdit_2013\Functions\RemoveCollisionVertexes.cs">
+      <Link>Functions\RemoveCollisionVertexes.cs</Link>
+    </Compile>
+    <Compile Include="..\mpPlinesEdit_2013\Functions\RemoveMatchVertexes.cs">
+      <Link>Functions\RemoveMatchVertexes.cs</Link>
+    </Compile>
     <Compile Include="..\mpPlinesEdit_2013\Help\NoArcSettings.xaml.cs">
       <Link>Help\NoArcSettings.xaml.cs</Link>
       <DependentUpon>NoArcSettings.xaml</DependentUpon>
@@ -85,12 +118,18 @@
     <Compile Include="..\mpPlinesEdit_2013\ModPlusConnector.cs">
       <Link>ModPlusConnector.cs</Link>
     </Compile>
-    <Compile Include="..\mpPlinesEdit_2013\MpPlines.cs">
-      <Link>MpPlines.cs</Link>
-    </Compile>
     <Compile Include="..\mpPlinesEdit_2013\PlinesEdit.xaml.cs">
       <Link>PlinesEdit.xaml.cs</Link>
       <DependentUpon>PlinesEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\mpPlinesEdit_2013\PlinesEditFunction.cs">
+      <Link>PlinesEditFunction.cs</Link>
+    </Compile>
+    <Compile Include="..\mpPlinesEdit_2013\PlinesEditRibbonBuilder.cs">
+      <Link>PlinesEditRibbonBuilder.cs</Link>
+    </Compile>
+    <Compile Include="..\mpPlinesEdit_2013\PlinesFunction.cs">
+      <Link>PlinesFunction.cs</Link>
     </Compile>
     <Compile Include="..\mpPlinesEdit_2013\Properties\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
@@ -252,6 +291,13 @@
     <Resource Include="..\mpPlinesEdit_2013\Resources\mpPlinesEdit_32x32_dark.png">
       <Link>Resources\mpPlinesEdit_32x32_dark.png</Link>
     </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
+    <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

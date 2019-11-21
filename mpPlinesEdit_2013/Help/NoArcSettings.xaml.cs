@@ -1,11 +1,11 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media.Imaging;
-using ModPlusAPI.Windows;
-
-namespace mpPlinesEdit.Help
+﻿namespace mpPlinesEdit.Help
 {
+    using System;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Media.Imaging;
+    using ModPlusAPI.Windows;
+
     public partial class NoArcSettings
     {
         private const string LangItem = "mpPlinesEdit";

@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <CodeAnalysisRuleSet>$(SolutionDir)\ModPlus.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="accoremgd">
       <HintPath>C:\_Acad dlls\2013\accoremgd.dll</HintPath>
@@ -70,11 +73,20 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Functions\ConvertSegmentArcToLine.cs" />
+    <Compile Include="Functions\ConvertSegmentLineToArc.cs" />
+    <Compile Include="Functions\ConvertThreeDto2D.cs" />
+    <Compile Include="Functions\CreateMiddleLine.cs" />
+    <Compile Include="Functions\CreateRectangleByThreePoint.cs" />
+    <Compile Include="Functions\DynamicAddVertex.cs" />
+    <Compile Include="Functions\PlaceObjectToVertex.cs" />
+    <Compile Include="Functions\RemoveArcs.cs" />
+    <Compile Include="Functions\RemoveCollisionVertexes.cs" />
+    <Compile Include="Functions\RemoveMatchVertexes.cs" />
     <Compile Include="Help\VxCollinHelp.xaml.cs">
       <DependentUpon>VxCollinHelp.xaml</DependentUpon>
     </Compile>
     <Compile Include="ModPlusConnector.cs" />
-    <Compile Include="MpPlines.cs" />
     <Compile Include="Help\NoArcSettings.xaml.cs">
       <DependentUpon>NoArcSettings.xaml</DependentUpon>
     </Compile>
@@ -84,6 +96,9 @@
     <Compile Include="Help\ObjectToVxSettings.xaml.cs">
       <DependentUpon>ObjectToVxSettings.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PlinesEditFunction.cs" />
+    <Compile Include="PlinesEditRibbonBuilder.cs" />
+    <Compile Include="PlinesFunction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -166,6 +181,14 @@
     <Resource Include="Icons\mpPl-Rect3Pt_16x16_dark.png" />
     <Resource Include="Icons\mpPl-VxCollin_16x16_dark.png" />
     <Resource Include="Icons\mpPl-VxMatchRemove_16x16_dark.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
+    <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -2,6 +2,7 @@
                       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       xmlns:mps="https://modplus.org/winfx/xaml/controls"
+                      xmlns:mpPlinesEdit="clr-namespace:mpPlinesEdit"
                       SizeToContent="WidthAndHeight"
                       Topmost="True" ResizeMode="NoResize">
     <Window.Resources>
@@ -23,69 +24,67 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"
-                Margin="{DynamicResource ModPlusDefaultMargin}"
-                BorderThickness="1" BorderBrush="{DynamicResource BoxesBorderBrush}">
-        <ScrollViewer  Height="300"
+        <mps:Card Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
+            <ScrollViewer  Height="300"
                        VerticalScrollBarVisibility="Visible"
                        HorizontalScrollBarVisibility="Disabled">
-            <ItemsControl  Name="LvFunctions">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Button Tag="{Binding Name}" Click="FunctionButton_OnClick"
+                <ItemsControl  Name="LvFunctions">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate DataType="mpPlinesEdit:PlinesFunction">
+                            <Button Tag="{Binding Path=Name}" Click="FunctionButton_OnClick"
                             Padding="4 2 8 2" Margin="0"
                             Style="{DynamicResource ModPlusFlatButton}"
                             Foreground="{DynamicResource BlackBrush}">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"></RowDefinition>
-                                    <RowDefinition Height="Auto"></RowDefinition>
-                                    <RowDefinition Height="Auto"></RowDefinition>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                    <ColumnDefinition Width="*"></ColumnDefinition>
-                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <Border Grid.Column="0" Grid.Row="0" Grid.RowSpan="3"
-                                    Margin="2,2,5,2" VerticalAlignment="Center"
-                                    BorderBrush="{StaticResource BlackBrush}"
-                                    BorderThickness="1" Padding="2" Background="White">
-                                    <Image Width="32" Height="32" Stretch="UniformToFill"
-                                   Source="{Binding ImageBig}"
-                                   RenderOptions.BitmapScalingMode="NearestNeighbor"
-                                   RenderOptions.EdgeMode="Unspecified"></Image>
-                                </Border>
-                                <TextBlock Grid.Row="0" Grid.Column="1" FontSize="12" FontWeight="SemiBold"
-                                   Foreground="{StaticResource AccentColorBrush}"
-                                   Text="{Binding Name}"></TextBlock>
-                                <TextBlock Grid.Row="1" Grid.Column="1" FontSize="12"
-                                       Text="{Binding LocalName}"></TextBlock>
-                                <TextBlock Grid.Row="2" Grid.Column="1" FontSize="10"
-                                       Width="350" TextWrapping="Wrap"
-                                       Text="{Binding Description}"></TextBlock>
-                                <StackPanel Grid.Row="0" Grid.RowSpan="3" Grid.Column="2" Margin="5,0,0,0"
-                                        Orientation="Vertical" VerticalAlignment="Top">
-                                    <TextBlock FontSize="12" Foreground="{StaticResource AccentColorBrush}"
-                                           FontWeight="SemiBold" ToolTip="{Binding Source={StaticResource Lang}, XPath=h2}"
-                                           ToolTipService.InitialShowDelay="0"
-                                           Visibility="{Binding P3D, Converter={StaticResource BoolToVis}}">3D</TextBlock>
-                                    <TextBlock FontSize="12" Foreground="{StaticResource AccentColorBrush}"
-                                           FontWeight="SemiBold" ToolTip="{Binding Source={StaticResource Lang}, XPath=h3}"
-                                           ToolTipService.InitialShowDelay="0"
-                                           Visibility="{Binding P2D, Converter={StaticResource BoolToVis}}">2D</TextBlock>
-                                    <TextBlock FontSize="12" Foreground="{StaticResource AccentColorBrush}"
-                                           FontWeight="SemiBold" ToolTip="{Binding Source={StaticResource Lang}, XPath=h4}"
-                                           ToolTipService.InitialShowDelay="0"
-                                           Visibility="{Binding Plw, Converter={StaticResource BoolToVis}}">LW</TextBlock>
-                                </StackPanel>
-                            </Grid>
-                        </Button>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </ScrollViewer>
-        </Border>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Border Grid.Column="0" Grid.Row="0" Grid.RowSpan="3"
+                                            Margin="2,2,5,2" VerticalAlignment="Center"
+                                            BorderBrush="{StaticResource BlackBrush}"
+                                            BorderThickness="1" Padding="2" Background="White">
+                                        <Image Width="32" Height="32" Stretch="UniformToFill"
+                                               Source="{Binding Path=ImageBig}"
+                                               RenderOptions.BitmapScalingMode="NearestNeighbor"
+                                               RenderOptions.EdgeMode="Unspecified"></Image>
+                                    </Border>
+                                    <TextBlock Grid.Row="0" Grid.Column="1" FontSize="12" FontWeight="SemiBold"
+                                               Foreground="{StaticResource AccentColorBrush}"
+                                               Text="{Binding Name}"></TextBlock>
+                                    <TextBlock Grid.Row="1" Grid.Column="1" FontSize="12"
+                                               Text="{Binding Path=LocalName}"></TextBlock>
+                                    <TextBlock Grid.Row="2" Grid.Column="1" FontSize="10"
+                                               Width="350" TextWrapping="Wrap"
+                                               Text="{Binding Path=Description}"></TextBlock>
+                                    <StackPanel Grid.Row="0" Grid.RowSpan="3" Grid.Column="2" Margin="5,0,0,0"
+                                                Orientation="Vertical" VerticalAlignment="Top">
+                                        <TextBlock FontSize="12" Foreground="{StaticResource AccentColorBrush}"
+                                                   FontWeight="SemiBold" ToolTip="{Binding Source={StaticResource Lang}, XPath=h2}"
+                                                   ToolTipService.InitialShowDelay="0"
+                                                   Visibility="{Binding P3D, Converter={StaticResource BoolToVis}}">3D</TextBlock>
+                                        <TextBlock FontSize="12" Foreground="{StaticResource AccentColorBrush}"
+                                                   FontWeight="SemiBold" ToolTip="{Binding Source={StaticResource Lang}, XPath=h3}"
+                                                   ToolTipService.InitialShowDelay="0"
+                                                   Visibility="{Binding P2D, Converter={StaticResource BoolToVis}}">2D</TextBlock>
+                                        <TextBlock FontSize="12" Foreground="{StaticResource AccentColorBrush}"
+                                                   FontWeight="SemiBold" ToolTip="{Binding Source={StaticResource Lang}, XPath=h4}"
+                                                   ToolTipService.InitialShowDelay="0"
+                                                   Visibility="{Binding Plw, Converter={StaticResource BoolToVis}}">LW</TextBlock>
+                                    </StackPanel>
+                                </Grid>
+                            </Button>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </mps:Card>
         <CheckBox Grid.Row="1" Name="ChkRibbon"
                   Checked="ChkRibbon_OnChecked"
                   Unchecked="ChkRibbon_OnUnchecked"
