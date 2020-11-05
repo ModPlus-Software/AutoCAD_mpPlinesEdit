@@ -19,7 +19,9 @@
         [CommandMethod("ModPlus", "mpPl-Line2Arc", CommandFlags.UsePickSet)]
         public static void StartFunction()
         {
-            Statistic.SendCommandStarting(new ModPlusConnector());
+#if !DEBUG
+            Statistic.SendCommandStarting(ModPlusConnector.Instance);
+#endif
             try
             {
                 var doc = Application.DocumentManager.MdiActiveDocument;
@@ -28,12 +30,12 @@
                 var workType = "Tangent";
                 while (true)
                 {
-                    var peo = new PromptEntityOptions("\n" + Language.GetItem(PlinesEditFunction.LangItem, "k16") + ":")
+                    var peo = new PromptEntityOptions($"\n{Language.GetItem(PlinesEditFunction.LangItem, "k16")}:")
                     {
                         AllowNone = false,
                         AllowObjectOnLockedLayer = true
                     };
-                    peo.SetRejectMessage("\n" + Language.GetItem(PlinesEditFunction.LangItem, "wrong"));
+                    peo.SetRejectMessage($"\n{Language.GetItem(PlinesEditFunction.LangItem, "wrong")}");
                     peo.AddAllowedClass(typeof(Polyline), true);
 
                     var per = ed.GetEntity(peo);
@@ -110,12 +112,12 @@
                 {
                     if (_workType.Equals("Tangent"))
                     {
-                        ppo.SetMessageAndKeywords("\n" + Language.GetItem(PlinesEditFunction.LangItem, "k17"), "Tangent Point");
+                        ppo.SetMessageAndKeywords($"\n{Language.GetItem(PlinesEditFunction.LangItem, "k17")}", "Tangent Point");
                     }
 
                     if (_workType.Equals("Point"))
                     {
-                        ppo.SetMessageAndKeywords("\n" + Language.GetItem(PlinesEditFunction.LangItem, "k18"), "Tangent Point");
+                        ppo.SetMessageAndKeywords($"\n{Language.GetItem(PlinesEditFunction.LangItem, "k18")}", "Tangent Point");
                     }
 
                     ppo.BasePoint = _startPoint;

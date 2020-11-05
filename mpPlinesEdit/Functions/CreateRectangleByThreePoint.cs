@@ -19,7 +19,9 @@
         [CommandMethod("ModPlus", "mpPl-Rect3Pt", CommandFlags.Redraw)]
         public static void StartFunction()
         {
-            Statistic.SendCommandStarting(new ModPlusConnector());
+#if !DEBUG
+            Statistic.SendCommandStarting(ModPlusConnector.Instance);
+#endif
             try
             {
                 var doc = Application.DocumentManager.MdiActiveDocument;
@@ -27,7 +29,7 @@
                 var ed = doc.Editor;
 
                 // first point
-                var ppo = new PromptPointOptions("\n" + Language.GetItem(PlinesEditFunction.LangItem, "k20") + ":")
+                var ppo = new PromptPointOptions($"\n{Language.GetItem(PlinesEditFunction.LangItem, "k20")}:")
                 {
                     UseBasePoint = false,
                     AllowNone = true
@@ -43,7 +45,7 @@
                 var fPt = ppr.Value;
 
                 // second point
-                ppo = new PromptPointOptions("\n" + Language.GetItem(PlinesEditFunction.LangItem, "k21") + ":")
+                ppo = new PromptPointOptions($"\n{Language.GetItem(PlinesEditFunction.LangItem, "k21")}:")
                 {
                     UseBasePoint = true,
                     BasePoint = fPt,
@@ -118,7 +120,8 @@
 
             protected override SamplerStatus Sampler(JigPrompts prompts)
             {
-                var jigPromptPointOptions = new JigPromptPointOptions("\n" + Language.GetItem(PlinesEditFunction.LangItem, "k22") + ":")
+                var jigPromptPointOptions = new JigPromptPointOptions(
+                    $"\n{Language.GetItem(PlinesEditFunction.LangItem, "k22")}:")
                 {
                     UserInputControls = UserInputControls.Accept3dCoordinates
                                         | UserInputControls.NoNegativeResponseAccepted

@@ -19,7 +19,9 @@
         [CommandMethod("ModPlus", "mpPl-NoArc", CommandFlags.UsePickSet)]
         public static void StartFunction()
         {
-            Statistic.SendCommandStarting(new ModPlusConnector());
+#if !DEBUG
+            Statistic.SendCommandStarting(ModPlusConnector.Instance);
+#endif
             try
             {
                 var doc = Application.DocumentManager.MdiActiveDocument;
@@ -41,7 +43,7 @@
                 var pso = new PromptSelectionOptions
                 {
                     AllowDuplicates = false,
-                    MessageForAdding = "\n" + Language.GetItem(PlinesEditFunction.LangItem, "k2") + ":"
+                    MessageForAdding = $"\n{Language.GetItem(PlinesEditFunction.LangItem, "k2")}:"
                 };
                 var filList = new[] { new TypedValue((int)DxfCode.Start, "LWPOLYLINE") };
                 var sf = new SelectionFilter(filList);
@@ -66,7 +68,8 @@
                             {
                                 #region segmentCount
                                 case "SegmentCount":
-                                    var pio = new PromptIntegerOptions("\n" + Language.GetItem(PlinesEditFunction.LangItem, "k23") + ":")
+                                    var pio = new PromptIntegerOptions(
+                                        $"\n{Language.GetItem(PlinesEditFunction.LangItem, "k23")}:")
                                     {
                                         DefaultValue = 5,
                                         LowerLimit = 1,
@@ -139,7 +142,8 @@
                                 #endregion
                                 #region SegmentLength
                                 case "SegmentLength":
-                                    var pdo = new PromptDoubleOptions("\n" + Language.GetItem(PlinesEditFunction.LangItem, "k24") + ":")
+                                    var pdo = new PromptDoubleOptions(
+                                        $"\n{Language.GetItem(PlinesEditFunction.LangItem, "k24")}:")
                                     {
                                         DefaultValue = 100,
                                         AllowArbitraryInput = true,
@@ -215,7 +219,8 @@
                                 #endregion
                                 #region ChordHeight
                                 case "ChordHeight":
-                                    pdo = new PromptDoubleOptions("\n" + Language.GetItem(PlinesEditFunction.LangItem, "k25") + ":")
+                                    pdo = new PromptDoubleOptions(
+                                        $"\n{Language.GetItem(PlinesEditFunction.LangItem, "k25")}:")
                                     {
                                         DefaultValue = 0.5,
                                         AllowArbitraryInput = true,
@@ -292,7 +297,8 @@
                                 #endregion
                                 #region ChordLength
                                 case "ChordLength":
-                                    pdo = new PromptDoubleOptions("\n" + Language.GetItem(PlinesEditFunction.LangItem, "k26") + ":")
+                                    pdo = new PromptDoubleOptions(
+                                        $"\n{Language.GetItem(PlinesEditFunction.LangItem, "k26")}:")
                                     {
                                         DefaultValue = 10,
                                         AllowArbitraryInput = true,

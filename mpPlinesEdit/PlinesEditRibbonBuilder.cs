@@ -41,7 +41,7 @@
                 else
                 {
                     Application.DocumentManager.MdiActiveDocument.Editor.WriteMessage(
-                          "\n" + Language.GetItem(PlinesEditFunction.LangItem, "h8"));
+                        $"\n{Language.GetItem(PlinesEditFunction.LangItem, "h8")}");
                 }
             }
         }
@@ -76,7 +76,7 @@
                 else
                 {
                     Application.DocumentManager.MdiActiveDocument.Editor.WriteMessage(
-                        "\n" + Language.GetItem(PlinesEditFunction.LangItem, "h8"));
+                        $"\n{Language.GetItem(PlinesEditFunction.LangItem, "h8")}");
                 }
             }
         }
@@ -181,7 +181,7 @@
                 if (!(parameter is RibbonButton))
                     return;
                 Application.DocumentManager.MdiActiveDocument.SendStringToExecute(
-                    ((RibbonButton)parameter).CommandParameter + " ", true, false, false);
+                    $"{((RibbonButton)parameter).CommandParameter} ", true, false, false);
             }
         }
     }

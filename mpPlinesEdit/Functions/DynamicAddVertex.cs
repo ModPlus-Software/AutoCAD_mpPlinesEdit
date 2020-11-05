@@ -19,19 +19,21 @@
         [CommandMethod("ModPlus", "mpPl-AddVertex", CommandFlags.UsePickSet)]
         public static void StartFunction()
         {
-            Statistic.SendCommandStarting(new ModPlusConnector());
+#if !DEBUG
+            Statistic.SendCommandStarting(ModPlusConnector.Instance);
+#endif
             try
             {
                 var doc = Application.DocumentManager.MdiActiveDocument;
                 var db = doc.Database;
                 var ed = doc.Editor;
 
-                var peo = new PromptEntityOptions("\n" + Language.GetItem(PlinesEditFunction.LangItem, "k13") + ":")
+                var peo = new PromptEntityOptions($"\n{Language.GetItem(PlinesEditFunction.LangItem, "k13")}:")
                 {
                     AllowNone = false,
                     AllowObjectOnLockedLayer = true
                 };
-                peo.SetRejectMessage("\n" + Language.GetItem(PlinesEditFunction.LangItem, "wrong"));
+                peo.SetRejectMessage($"\n{Language.GetItem(PlinesEditFunction.LangItem, "wrong")}");
                 peo.AddAllowedClass(typeof(Polyline), true);
 
                 var per = ed.GetEntity(peo);
@@ -110,7 +112,7 @@
 
             protected override SamplerStatus Sampler(JigPrompts prompts)
             {
-                var ppo = new JigPromptPointOptions("\n" + Language.GetItem(PlinesEditFunction.LangItem, "k19") + ":")
+                var ppo = new JigPromptPointOptions($"\n{Language.GetItem(PlinesEditFunction.LangItem, "k19")}:")
                 {
                     BasePoint = _startPoint,
                     UseBasePoint = true,

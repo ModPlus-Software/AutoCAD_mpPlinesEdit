@@ -16,7 +16,9 @@
         [CommandMethod("ModPlus", "mpPl-VxMatchRemove", CommandFlags.UsePickSet)]
         public static void StartFunction()
         {
-            Statistic.SendCommandStarting(new ModPlusConnector());
+#if !DEBUG
+            Statistic.SendCommandStarting(ModPlusConnector.Instance);
+#endif
             try
             {
                 var doc = Application.DocumentManager.MdiActiveDocument;
@@ -26,7 +28,7 @@
                 var pso = new PromptSelectionOptions
                 {
                     AllowDuplicates = false,
-                    MessageForAdding = "\n" + Language.GetItem(PlinesEditFunction.LangItem, "k2") + ":"
+                    MessageForAdding = $"\n{Language.GetItem(PlinesEditFunction.LangItem, "k2")}:"
                 };
                 var filList = new[] { new TypedValue((int)DxfCode.Start, "*POLYLINE") };
                 var sf = new SelectionFilter(filList);
@@ -159,13 +161,12 @@
                             {
                                 if (plCount == 1)
                                 {
-                                    MessageBox.Show(Language.GetItem(PlinesEditFunction.LangItem, "k3") + ":" + deleted);
+                                    MessageBox.Show($"{Language.GetItem(PlinesEditFunction.LangItem, "k3")}:{deleted}");
                                 }
                                 else
                                 {
                                     ed.WriteMessage(
-                                        "\n" + Language.GetItem(PlinesEditFunction.LangItem, "k4") + ":" + objectId + " " +
-                                        Language.GetItem(PlinesEditFunction.LangItem, "k3").ToLower() + ":" + deleted);
+                                        $"\n{Language.GetItem(PlinesEditFunction.LangItem, "k4")}:{objectId} {Language.GetItem(PlinesEditFunction.LangItem, "k3").ToLower()}:{deleted}");
                                 }
                             }
                             else
@@ -173,14 +174,12 @@
                                 if (plCount == 1)
                                 {
                                     MessageBox.Show(
-                                        Language.GetItem(PlinesEditFunction.LangItem, "k4") + " " + 
-                                        Language.GetItem(PlinesEditFunction.LangItem, "k5"));
+                                        $"{Language.GetItem(PlinesEditFunction.LangItem, "k4")} {Language.GetItem(PlinesEditFunction.LangItem, "k5")}");
                                 }
                                 else
                                 {
                                     ed.WriteMessage(
-                                        "\n" + Language.GetItem(PlinesEditFunction.LangItem, "k4") + " " + objectId + " " + 
-                                        Language.GetItem(PlinesEditFunction.LangItem, "k5"));
+                                        $"\n{Language.GetItem(PlinesEditFunction.LangItem, "k4")} {objectId} {Language.GetItem(PlinesEditFunction.LangItem, "k5")}");
                                 }
                             }
                         }

@@ -20,7 +20,9 @@
         [CommandMethod("ModPlus", "mpPl-VxCollin", CommandFlags.UsePickSet)]
         public static void StartFunction()
         {
-            Statistic.SendCommandStarting(new ModPlusConnector());
+#if !DEBUG
+            Statistic.SendCommandStarting(ModPlusConnector.Instance);
+#endif
             var doc = Application.DocumentManager.MdiActiveDocument;
             var db = doc.Database;
             var ed = doc.Editor;
@@ -35,7 +37,7 @@
 
             // Set our prompts to include our keywords
             var kws = pso.Keywords.GetDisplayString(true);
-            pso.MessageForAdding = "\n" + Language.GetItem(PlinesEditFunction.LangItem, "k6") + ":" + kws;
+            pso.MessageForAdding = $"\n{Language.GetItem(PlinesEditFunction.LangItem, "k6")}:{kws}";
             pso.KeywordInput +=
                 (sender, e) =>
                 {
@@ -60,10 +62,10 @@
                         {
                             maxH = win.TbMaxH.Value ?? 0.0;
                             ModPlus.Helpers.XDataHelpers.SetStringXData("mpPl_VxCollin_maxH", maxH.ToString(CultureInfo.InvariantCulture));
-                            ed.WriteMessage("\n" + Language.GetItem(PlinesEditFunction.LangItem, "k8") + ":" + maxH);
+                            ed.WriteMessage($"\n{Language.GetItem(PlinesEditFunction.LangItem, "k8")}:{maxH}");
                             maxA = win.TbMaxA.Value ?? 0.0;
                             ModPlus.Helpers.XDataHelpers.SetStringXData("mpPl_VxCollin_maxA", maxA.ToString(CultureInfo.InvariantCulture));
-                            ed.WriteMessage("\n" + Language.GetItem(PlinesEditFunction.LangItem, "k9") + ":" + maxA);
+                            ed.WriteMessage($"\n{Language.GetItem(PlinesEditFunction.LangItem, "k9")}:{maxA}");
                         }
                     }
                 };
@@ -102,16 +104,12 @@
                                         if (plCount == 1)
                                         {
                                             MessageBox.Show(
-                                                Language.GetItem(PlinesEditFunction.LangItem, "k4") + " " +
-                                                Language.GetItem(PlinesEditFunction.LangItem, "k10") + " " + polyline.NumberOfVertices + " " +
-                                                Language.GetItem(PlinesEditFunction.LangItem, "k11") + "!");
+                                                $"{Language.GetItem(PlinesEditFunction.LangItem, "k4")} {Language.GetItem(PlinesEditFunction.LangItem, "k10")} {polyline.NumberOfVertices} {Language.GetItem(PlinesEditFunction.LangItem, "k11")}!");
                                         }
                                         else
                                         {
-                                            ed.WriteMessage("\n" +
-                                                            Language.GetItem(PlinesEditFunction.LangItem, "k4") + ":" + objectId + " " +
-                                                            Language.GetItem(PlinesEditFunction.LangItem, "k10") + " " + polyline.NumberOfVertices + " " +
-                                                            Language.GetItem(PlinesEditFunction.LangItem, "k11") + "!");
+                                            ed.WriteMessage(
+                                                $"\n{Language.GetItem(PlinesEditFunction.LangItem, "k4")}:{objectId} {Language.GetItem(PlinesEditFunction.LangItem, "k10")} {polyline.NumberOfVertices} {Language.GetItem(PlinesEditFunction.LangItem, "k11")}!");
                                         }
 
                                         continue;
@@ -194,16 +192,12 @@
                                         if (plCount == 1)
                                         {
                                             MessageBox.Show(
-                                                Language.GetItem(PlinesEditFunction.LangItem, "k4") + " " +
-                                                Language.GetItem(PlinesEditFunction.LangItem, "k10") + " " + vertexes.Count + " " +
-                                                Language.GetItem(PlinesEditFunction.LangItem, "k11") + "!");
+                                                $"{Language.GetItem(PlinesEditFunction.LangItem, "k4")} {Language.GetItem(PlinesEditFunction.LangItem, "k10")} {vertexes.Count} {Language.GetItem(PlinesEditFunction.LangItem, "k11")}!");
                                         }
                                         else
                                         {
-                                            ed.WriteMessage("\n" +
-                                                            Language.GetItem(PlinesEditFunction.LangItem, "k4") + ":" + objectId + " " +
-                                                            Language.GetItem(PlinesEditFunction.LangItem, "k10") + " " + vertexes.Count + " " +
-                                                            Language.GetItem(PlinesEditFunction.LangItem, "k11") + "!");
+                                            ed.WriteMessage(
+                                                $"\n{Language.GetItem(PlinesEditFunction.LangItem, "k4")}:{objectId} {Language.GetItem(PlinesEditFunction.LangItem, "k10")} {vertexes.Count} {Language.GetItem(PlinesEditFunction.LangItem, "k11")}!");
                                         }
 
                                         continue;
@@ -271,16 +265,12 @@
                                         if (plCount == 1)
                                         {
                                             MessageBox.Show(
-                                                Language.GetItem(PlinesEditFunction.LangItem, "k4") + " " +
-                                                Language.GetItem(PlinesEditFunction.LangItem, "k10") + " " + vertexes.Count + " " +
-                                                Language.GetItem(PlinesEditFunction.LangItem, "k11") + "!");
+                                                $"{Language.GetItem(PlinesEditFunction.LangItem, "k4")} {Language.GetItem(PlinesEditFunction.LangItem, "k10")} {vertexes.Count} {Language.GetItem(PlinesEditFunction.LangItem, "k11")}!");
                                         }
                                         else
                                         {
-                                            ed.WriteMessage("\n" +
-                                                            Language.GetItem(PlinesEditFunction.LangItem, "k4") + ":" + objectId + " " +
-                                                            Language.GetItem(PlinesEditFunction.LangItem, "k10") + " " + vertexes.Count + " " +
-                                                            Language.GetItem(PlinesEditFunction.LangItem, "k11") + "!");
+                                            ed.WriteMessage(
+                                                $"\n{Language.GetItem(PlinesEditFunction.LangItem, "k4")}:{objectId} {Language.GetItem(PlinesEditFunction.LangItem, "k10")} {vertexes.Count} {Language.GetItem(PlinesEditFunction.LangItem, "k11")}!");
                                         }
 
                                         continue;
@@ -333,12 +323,13 @@
                                 {
                                     if (plCount == 1)
                                     {
-                                        MessageBox.Show(Language.GetItem(PlinesEditFunction.LangItem, "k3") + ":" + deleted);
+                                        MessageBox.Show(
+                                            $"{Language.GetItem(PlinesEditFunction.LangItem, "k3")}:{deleted}");
                                     }
                                     else
                                     {
-                                        ed.WriteMessage("\n" + Language.GetItem(PlinesEditFunction.LangItem, "k4") + ":" + objectId + " " +
-                                                        Language.GetItem(PlinesEditFunction.LangItem, "k3").ToLower() + ":" + deleted);
+                                        ed.WriteMessage(
+                                            $"\n{Language.GetItem(PlinesEditFunction.LangItem, "k4")}:{objectId} {Language.GetItem(PlinesEditFunction.LangItem, "k3").ToLower()}:{deleted}");
                                     }
                                 }
                                 else
@@ -346,14 +337,12 @@
                                     if (plCount == 1)
                                     {
                                         MessageBox.Show(
-                                            Language.GetItem(PlinesEditFunction.LangItem, "k4") + " " +
-                                            Language.GetItem(PlinesEditFunction.LangItem, "k12"));
+                                            $"{Language.GetItem(PlinesEditFunction.LangItem, "k4")} {Language.GetItem(PlinesEditFunction.LangItem, "k12")}");
                                     }
                                     else
                                     {
-                                        ed.WriteMessage("\n" +
-                                                        Language.GetItem(PlinesEditFunction.LangItem, "k4") + ":" + objectId + " " +
-                                                        Language.GetItem(PlinesEditFunction.LangItem, "k12"));
+                                        ed.WriteMessage(
+                                            $"\n{Language.GetItem(PlinesEditFunction.LangItem, "k4")}:{objectId} {Language.GetItem(PlinesEditFunction.LangItem, "k12")}");
                                     }
                                 }
                             }

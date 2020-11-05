@@ -17,7 +17,9 @@
         [CommandMethod("ModPlus", "mpPl-Arc2Line", CommandFlags.UsePickSet)]
         public static void StartFunction()
         {
-            Statistic.SendCommandStarting(new ModPlusConnector());
+#if !DEBUG
+            Statistic.SendCommandStarting(ModPlusConnector.Instance);
+#endif
             var doc = Application.DocumentManager.MdiActiveDocument;
             var db = doc.Database;
             var ed = doc.Editor;
@@ -29,12 +31,12 @@
             {
                 while (true)
                 {
-                    var peo = new PromptEntityOptions("\n" + Language.GetItem(PlinesEditFunction.LangItem, "k15") + ":")
+                    var peo = new PromptEntityOptions($"\n{Language.GetItem(PlinesEditFunction.LangItem, "k15")}:")
                     {
                         AllowNone = false,
                         AllowObjectOnLockedLayer = true
                     };
-                    peo.SetRejectMessage("\n" + Language.GetItem(PlinesEditFunction.LangItem, "wrong"));
+                    peo.SetRejectMessage($"\n{Language.GetItem(PlinesEditFunction.LangItem, "wrong")}");
                     peo.AddAllowedClass(typeof(Polyline), true);
 
                     var per = ed.GetEntity(peo);

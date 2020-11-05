@@ -19,7 +19,9 @@
         [CommandMethod("ModPlus", "mpPl-MiddleLine", CommandFlags.Session)]
         public static void StartFunction()
         {
-            Statistic.SendCommandStarting(new ModPlusConnector());
+#if !DEBUG
+            Statistic.SendCommandStarting(ModPlusConnector.Instance);
+#endif
             var doc = AcApp.DocumentManager.MdiActiveDocument;
             var db = doc.Database;
             var ed = doc.Editor;
@@ -34,12 +36,12 @@
                     using (var tr = doc.TransactionManager.StartTransaction())
                     {
                         // Выбор первого примитива (кривой)
-                        var peo = new PromptEntityOptions("\n" + Language.GetItem(PlinesEditFunction.LangItem, "k27") + ":")
+                        var peo = new PromptEntityOptions($"\n{Language.GetItem(PlinesEditFunction.LangItem, "k27")}:")
                         {
                             AllowNone = false,
                             AllowObjectOnLockedLayer = true
                         };
-                        peo.SetRejectMessage("\n" + Language.GetItem(PlinesEditFunction.LangItem, "wrong"));
+                        peo.SetRejectMessage($"\n{Language.GetItem(PlinesEditFunction.LangItem, "wrong")}");
                         peo.AddAllowedClass(typeof(Polyline2d), true);
                         peo.AddAllowedClass(typeof(Polyline3d), true);
                         peo.AddAllowedClass(typeof(Polyline), true);
@@ -60,7 +62,7 @@
                         }
 
                         // Выбор второго примитива (кривой)
-                        peo.Message = "\n" + Language.GetItem(PlinesEditFunction.LangItem, "k28") + ":";
+                        peo.Message = $"\n{Language.GetItem(PlinesEditFunction.LangItem, "k28")}:";
                         per = ed.GetEntity(peo);
                         if (per.Status != PromptStatus.OK)
                         {
@@ -74,7 +76,7 @@
                         }
 
                         // Количество опорных точек
-                        var pio = new PromptIntegerOptions("\n" + Language.GetItem(PlinesEditFunction.LangItem, "k29") + ":")
+                        var pio = new PromptIntegerOptions($"\n{Language.GetItem(PlinesEditFunction.LangItem, "k29")}:")
                         {
                             DefaultValue =
                                 int.TryParse(UserConfigFile.GetValue("mpPl_MiddleLine", "PointCount"), out var i) ? i : 100,

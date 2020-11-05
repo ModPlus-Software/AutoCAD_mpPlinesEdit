@@ -1,334 +1,195 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{34EAC410-A36A-415C-8739-6E910C35064A}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <Version>1.2.6.0</Version>
     <RootNamespace>mpPlinesEdit</RootNamespace>
-    <AssemblyName>mpPlinesEdit</AssemblyName>
-    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
+    <AssemblyName>$(RootNamespace)</AssemblyName>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Company>modplus.org</Company>
+    <Authors>modplus.org</Authors>
+    <Product>ModPlus</Product>
+    <Copyright>Copyright © ModPlus</Copyright>
     <CodeAnalysisRuleSet>$(SolutionDir)\ModPlus.ruleset</CodeAnalysisRuleSet>
-    <PlatformTarget>x64</PlatformTarget>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
+    <Platform>x64</Platform>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <Optimize>false</Optimize>
-    <OutputPath>bin\x64\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;A2021</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
-    <AssemblyName>$(AssemblyName)_2021</AssemblyName>
+    <UseWpf>true</UseWpf>
   </PropertyGroup>
-  <!-- For AutoCAD versions -->
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'A2013|x64'">
-    <OutputPath>bin\x64\A2013\</OutputPath>
-    <DefineConstants>TRACE;A2013</DefineConstants>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <AssemblyName>$(AssemblyName)_2013</AssemblyName>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'A2013'">
+    <TargetFramework>net45</TargetFramework>
+    <Description>2013</Description>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'A2014|x64'">
-    <OutputPath>bin\x64\A2014\</OutputPath>
-    <DefineConstants>TRACE;A2014</DefineConstants>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <AssemblyName>$(AssemblyName)_2014</AssemblyName>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'A2014'">
+    <TargetFramework>net45</TargetFramework>
+    <Description>2014</Description>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'A2015|x64'">
-    <OutputPath>bin\x64\A2015\</OutputPath>
-    <DefineConstants>TRACE;A2015</DefineConstants>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <AssemblyName>$(AssemblyName)_2015</AssemblyName>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'A2015'">
+    <TargetFramework>net45</TargetFramework>
+    <Description>2015</Description>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'A2016|x64'">
-    <OutputPath>bin\x64\A2016\</OutputPath>
-    <DefineConstants>TRACE;A2016</DefineConstants>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <AssemblyName>$(AssemblyName)_2016</AssemblyName>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'A2016'">
+    <TargetFramework>net45</TargetFramework>
+    <Description>2016</Description>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'A2017|x64'">
-    <OutputPath>bin\x64\A2017\</OutputPath>
-    <DefineConstants>TRACE;A2017</DefineConstants>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <AssemblyName>$(AssemblyName)_2017</AssemblyName>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'A2017'">
+    <TargetFramework>net45</TargetFramework>
+    <Description>2017</Description>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'A2018|x64'">
-    <OutputPath>bin\x64\A2018\</OutputPath>
-    <DefineConstants>TRACE;A2018</DefineConstants>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
-    <AssemblyName>$(AssemblyName)_2018</AssemblyName>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'A2018'">
+    <TargetFramework>net46</TargetFramework>
+    <Description>2018</Description>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'A2019|x64'">
-    <OutputPath>bin\x64\A2019\</OutputPath>
-    <DefineConstants>TRACE;A2019</DefineConstants>
-    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
-    <AssemblyName>$(AssemblyName)_2019</AssemblyName>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'A2019'">
+    <TargetFramework>net47</TargetFramework>
+    <Description>2019</Description>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'A2020|x64'">
-    <OutputPath>bin\x64\A2020\</OutputPath>
-    <DefineConstants>TRACE;A2020</DefineConstants>
-    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
-    <AssemblyName>$(AssemblyName)_2020</AssemblyName>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'A2020'">
+    <TargetFramework>net47</TargetFramework>
+    <Description>2020</Description>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'A2021|x64'">
-    <OutputPath>bin\x64\A2021\</OutputPath>
-    <DefineConstants>TRACE;A2021</DefineConstants>
-    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
-    <AssemblyName>$(AssemblyName)_2021</AssemblyName>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'A2021' or '$(Configuration)'=='Debug'">
+    <TargetFramework>net47</TargetFramework>
+    <Description>2021</Description>
   </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xaml" />
-    <Reference Include="WindowsBase" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Functions\ConvertSegmentArcToLine.cs" />
-    <Compile Include="Functions\ConvertSegmentLineToArc.cs" />
-    <Compile Include="Functions\ConvertThreeDto2D.cs" />
-    <Compile Include="Functions\CreateMiddleLine.cs" />
-    <Compile Include="Functions\CreateRectangleByThreePoint.cs" />
-    <Compile Include="Functions\DynamicAddVertex.cs" />
-    <Compile Include="Functions\PlaceObjectToVertex.cs" />
-    <Compile Include="Functions\RemoveArcs.cs" />
-    <Compile Include="Functions\RemoveCollisionVertexes.cs" />
-    <Compile Include="Functions\RemoveMatchVertexes.cs" />
-    <Compile Include="Help\VxCollinHelp.xaml.cs">
-      <DependentUpon>VxCollinHelp.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ModPlusConnector.cs" />
-    <Compile Include="Help\NoArcSettings.xaml.cs">
-      <DependentUpon>NoArcSettings.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="PlinesEdit.xaml.cs">
-      <DependentUpon>PlinesEdit.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Help\ObjectToVxSettings.xaml.cs">
-      <DependentUpon>ObjectToVxSettings.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="PlinesEditFunction.cs" />
-    <Compile Include="PlinesEditRibbonBuilder.cs" />
-    <Compile Include="PlinesFunction.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="Help\VxCollinHelp.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Help\NoArcSettings.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="PlinesEdit.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Help\ObjectToVxSettings.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\ObjToVx_obj.png" />
-    <Resource Include="Images\ObjToVx_pline.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\VxCollin_Help.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\NoArc1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\NoArc2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\NoArc3.png" />
-    <Resource Include="Images\NoArc4.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Icons\mpPl-3Dto2D_16x16.png" />
-    <Resource Include="Icons\mpPl-3Dto2D_32x32.png" />
-    <Resource Include="Icons\mpPl-AddVertex_16x16.png" />
-    <Resource Include="Icons\mpPl-AddVertex_32x32.png" />
-    <Resource Include="Icons\mpPl-Arc2Line_16x16.png" />
-    <Resource Include="Icons\mpPl-Arc2Line_32x32.png" />
-    <Resource Include="Icons\mpPl-Line2Arc_16x16.png" />
-    <Resource Include="Icons\mpPl-Line2Arc_32x32.png" />
-    <Resource Include="Icons\mpPl-NoArc_16x16.png" />
-    <Resource Include="Icons\mpPl-NoArc_32x32.png" />
-    <Resource Include="Icons\mpPl-ObjectToVx_16x16.png" />
-    <Resource Include="Icons\mpPl-ObjectToVx_32x32.png" />
-    <Resource Include="Icons\mpPl-Rect3Pt_16x16.png" />
-    <Resource Include="Icons\mpPl-Rect3Pt_32x32.png" />
-    <Resource Include="Icons\mpPl-VxCollin_16x16.png" />
-    <Resource Include="Icons\mpPl-VxCollin_32x32.png" />
-    <Resource Include="Icons\mpPl-VxMatchRemove_16x16.png" />
-    <Resource Include="Icons\mpPl-VxMatchRemove_32x32.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\mpPlinesEdit_16x16.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\mpPlinesEdit_32x32.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Icons\mpPl-MiddleLine_16x16.png" />
-    <Resource Include="Icons\mpPl-MiddleLine_32x32.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\mpPlinesEdit_16x16_dark.png" />
-    <Resource Include="Resources\mpPlinesEdit_32x32_dark.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Icons\mpPl-3Dto2D_16x16_dark.png" />
-    <Resource Include="Icons\mpPl-AddVertex_16x16_dark.png" />
-    <Resource Include="Icons\mpPl-Arc2Line_16x16_dark.png" />
-    <Resource Include="Icons\mpPl-Line2Arc_16x16_dark.png" />
-    <Resource Include="Icons\mpPl-MiddleLine_16x16_dark.png" />
-    <Resource Include="Icons\mpPl-NoArc_16x16_dark.png" />
-    <Resource Include="Icons\mpPl-ObjectToVx_16x16_dark.png" />
-    <Resource Include="Icons\mpPl-Rect3Pt_16x16_dark.png" />
-    <Resource Include="Icons\mpPl-VxCollin_16x16_dark.png" />
-    <Resource Include="Icons\mpPl-VxMatchRemove_16x16_dark.png" />
-  </ItemGroup>
-  <!-- CHOOSE -->
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <Configurations>Debug</Configurations>
+    <DefineConstants>Debug;A$(Description)</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' != 'Debug'">
+    <Configurations>A$(Description)</Configurations>
+    <DefineConstants>A$(Description)</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <AssemblyName>$(AssemblyName)_$(Description)</AssemblyName>
+  </PropertyGroup>
+
   <Choose>
-    <When Condition=" '$(Configuration)'=='A2013' ">
+    <When Condition="'$(Configuration)'=='A2013'">
       <ItemGroup>
-        <PackageReference Include="ModPlus.AutoCAD.API.2013">
-          <Version>1.0.0</Version>
-          <ExcludeAssets>runtime</ExcludeAssets>
-        </PackageReference>
-        <PackageReference Include="ModPlus.AutoCAD.Module.2013">
-          <Version>4.3.0.0</Version>
-          <ExcludeAssets>runtime</ExcludeAssets>
-        </PackageReference>
+        <PackageReference Include="ModPlus.AutoCAD.API.2013" Version="1.0.0" ExcludeAssets="runtime" />
+        <PackageReference Include="ModPlus.AutoCAD.Module.2013" Version="5.1.6.0" ExcludeAssets="runtime" />
       </ItemGroup>
     </When>
-    <When Condition=" '$(Configuration)'=='A2014' ">
+    <When Condition="'$(Configuration)'=='A2014'">
       <ItemGroup>
-        <PackageReference Include="ModPlus.AutoCAD.API.2014">
-          <Version>1.0.0</Version>
-          <ExcludeAssets>runtime</ExcludeAssets>
-        </PackageReference>
-        <PackageReference Include="ModPlus.AutoCAD.Module.2014">
-          <Version>4.3.0.0</Version>
-          <ExcludeAssets>runtime</ExcludeAssets>
-        </PackageReference>
+        <PackageReference Include="ModPlus.AutoCAD.API.2014" Version="1.0.0" ExcludeAssets="runtime" />
+        <PackageReference Include="ModPlus.AutoCAD.Module.2014" Version="5.1.6.0" ExcludeAssets="runtime" />
       </ItemGroup>
     </When>
-    <When Condition=" '$(Configuration)'=='A2015' ">
+    <When Condition="'$(Configuration)'=='A2015'">
       <ItemGroup>
-        <PackageReference Include="ModPlus.AutoCAD.API.2015">
-          <Version>1.0.0</Version>
-          <ExcludeAssets>runtime</ExcludeAssets>
-        </PackageReference>
-        <PackageReference Include="ModPlus.AutoCAD.Module.2015">
-          <Version>4.2.9.2</Version>
-          <ExcludeAssets>runtime</ExcludeAssets>
-        </PackageReference>
+        <PackageReference Include="ModPlus.AutoCAD.API.2015" Version="1.0.0" ExcludeAssets="runtime" />
+        <PackageReference Include="ModPlus.AutoCAD.Module.2015" Version="5.1.6.0" ExcludeAssets="runtime" />
       </ItemGroup>
     </When>
-    <When Condition=" '$(Configuration)'=='A2016' ">
+    <When Condition="'$(Configuration)'=='A2016'">
       <ItemGroup>
-        <PackageReference Include="ModPlus.AutoCAD.API.2016">
-          <Version>1.0.0</Version>
-          <ExcludeAssets>runtime</ExcludeAssets>
-        </PackageReference>
-        <PackageReference Include="ModPlus.AutoCAD.Module.2016">
-          <Version>4.3.0.0</Version>
-          <ExcludeAssets>runtime</ExcludeAssets>
-        </PackageReference>
+        <PackageReference Include="ModPlus.AutoCAD.API.2016" Version="1.0.0" ExcludeAssets="runtime" />
+        <PackageReference Include="ModPlus.AutoCAD.Module.2016" Version="5.1.6.0" ExcludeAssets="runtime" />
       </ItemGroup>
     </When>
-    <When Condition=" '$(Configuration)'=='A2017' ">
+    <When Condition="'$(Configuration)'=='A2017'">
       <ItemGroup>
-        <PackageReference Include="ModPlus.AutoCAD.API.2017">
-          <Version>1.0.0</Version>
-          <ExcludeAssets>runtime</ExcludeAssets>
-        </PackageReference>
-        <PackageReference Include="ModPlus.AutoCAD.Module.2017">
-          <Version>4.3.0.0</Version>
-          <ExcludeAssets>runtime</ExcludeAssets>
-        </PackageReference>
+        <PackageReference Include="ModPlus.AutoCAD.API.2017" Version="1.0.0" ExcludeAssets="runtime" />
+        <PackageReference Include="ModPlus.AutoCAD.Module.2017" Version="5.1.6.0" ExcludeAssets="runtime" />
       </ItemGroup>
     </When>
-    <When Condition=" '$(Configuration)'=='A2018' ">
+    <When Condition="'$(Configuration)'=='A2018'">
       <ItemGroup>
-        <PackageReference Include="ModPlus.AutoCAD.API.2018">
-          <Version>1.0.0</Version>
-          <ExcludeAssets>runtime</ExcludeAssets>
-        </PackageReference>
-        <PackageReference Include="ModPlus.AutoCAD.Module.2018">
-          <Version>4.3.0.0</Version>
-          <ExcludeAssets>runtime</ExcludeAssets>
-        </PackageReference>
+        <PackageReference Include="ModPlus.AutoCAD.API.2018" Version="1.0.0" ExcludeAssets="runtime" />
+        <PackageReference Include="ModPlus.AutoCAD.Module.2018" Version="5.1.6.0" ExcludeAssets="runtime" />
       </ItemGroup>
     </When>
-    <When Condition=" '$(Configuration)'=='A2019' ">
+    <When Condition="'$(Configuration)'=='A2019'">
       <ItemGroup>
-        <PackageReference Include="ModPlus.AutoCAD.API.2019">
-          <Version>1.0.0</Version>
-          <ExcludeAssets>runtime</ExcludeAssets>
-        </PackageReference>
-        <PackageReference Include="ModPlus.AutoCAD.Module.2019">
-          <Version>4.3.0.0</Version>
-          <ExcludeAssets>runtime</ExcludeAssets>
-        </PackageReference>
+        <PackageReference Include="ModPlus.AutoCAD.API.2019" Version="1.0.0" ExcludeAssets="runtime" />
+        <PackageReference Include="ModPlus.AutoCAD.Module.2019" Version="5.1.6.0" ExcludeAssets="runtime" />
       </ItemGroup>
     </When>
-    <When Condition=" '$(Configuration)'=='A2020' ">
+    <When Condition="'$(Configuration)'=='A2020'">
       <ItemGroup>
-        <PackageReference Include="ModPlus.AutoCAD.API.2020">
-          <Version>1.0.0</Version>
-          <ExcludeAssets>runtime</ExcludeAssets>
-        </PackageReference>
-        <PackageReference Include="ModPlus.AutoCAD.Module.2020">
-          <Version>4.3.0.0</Version>
-          <ExcludeAssets>runtime</ExcludeAssets>
-        </PackageReference>
+        <PackageReference Include="ModPlus.AutoCAD.API.2020" Version="1.0.0" ExcludeAssets="runtime" />
+        <PackageReference Include="ModPlus.AutoCAD.Module.2020" Version="5.1.6.0" ExcludeAssets="runtime" />
       </ItemGroup>
     </When>
-    <When Condition=" '$(Configuration)'=='A2021' or '$(Configuration)'=='Debug' ">
+    <When Condition="'$(Configuration)'=='A2021' or '$(Configuration)'=='Debug'">
       <ItemGroup>
-        <PackageReference Include="ModPlus.AutoCAD.API.2021">
-          <Version>1.0.0</Version>
-          <ExcludeAssets>runtime</ExcludeAssets>
-        </PackageReference>
-        <PackageReference Include="ModPlus.AutoCAD.Module.2021">
-          <Version>4.3.0.0</Version>
-          <ExcludeAssets>runtime</ExcludeAssets>
-        </PackageReference>
+        <PackageReference Include="ModPlus.AutoCAD.API.2021" Version="1.0.0" ExcludeAssets="runtime" />
+        <PackageReference Include="ModPlus.AutoCAD.Module.2021" Version="5.1.6.0" ExcludeAssets="runtime" />
       </ItemGroup>
     </When>
   </Choose>
+
   <ItemGroup>
-    <PackageReference Include="JetBrains.Annotations">
-      <Version>2019.1.3</Version>
-      <ExcludeAssets>runtime</ExcludeAssets>
-    </PackageReference>
-    <PackageReference Include="ModPlusAPI">
-      <Version>1.6.0</Version>
-      <ExcludeAssets>runtime</ExcludeAssets>
-    </PackageReference>
-    <PackageReference Include="ModPlusStyle">
-      <Version>2.0.0</Version>
-      <ExcludeAssets>runtime</ExcludeAssets>
-    </PackageReference>
-    <PackageReference Include="StyleCop.Analyzers">
-      <Version>1.1.118</Version>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    <PackageReference Include="ModPlusAPI" Version="4.7.0" ExcludeAssets="runtime" />
+    <PackageReference Include="ModPlusStyle" Version="3.6.0" ExcludeAssets="runtime" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
       <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+
+  <ItemGroup>
+    <Reference Include="System.Windows.Forms" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Icons\mpPl-3Dto2D_16x16.png" />
+    <Resource Include="Icons\mpPl-3Dto2D_16x16_dark.png" />
+    <Resource Include="Icons\mpPl-3Dto2D_32x32.png" />
+    <Resource Include="Icons\mpPl-AddVertex_16x16.png" />
+    <Resource Include="Icons\mpPl-AddVertex_16x16_dark.png" />
+    <Resource Include="Icons\mpPl-AddVertex_32x32.png" />
+    <Resource Include="Icons\mpPl-Arc2Line_16x16.png" />
+    <Resource Include="Icons\mpPl-Arc2Line_16x16_dark.png" />
+    <Resource Include="Icons\mpPl-Arc2Line_32x32.png" />
+    <Resource Include="Icons\mpPl-Line2Arc_16x16.png" />
+    <Resource Include="Icons\mpPl-Line2Arc_16x16_dark.png" />
+    <Resource Include="Icons\mpPl-Line2Arc_32x32.png" />
+    <Resource Include="Icons\mpPl-MiddleLine_16x16.png" />
+    <Resource Include="Icons\mpPl-MiddleLine_16x16_dark.png" />
+    <Resource Include="Icons\mpPl-MiddleLine_32x32.png" />
+    <Resource Include="Icons\mpPl-NoArc_16x16.png" />
+    <Resource Include="Icons\mpPl-NoArc_16x16_dark.png" />
+    <Resource Include="Icons\mpPl-NoArc_32x32.png" />
+    <Resource Include="Icons\mpPl-ObjectToVx_16x16.png" />
+    <Resource Include="Icons\mpPl-ObjectToVx_16x16_dark.png" />
+    <Resource Include="Icons\mpPl-ObjectToVx_32x32.png" />
+    <Resource Include="Icons\mpPl-Rect3Pt_16x16.png" />
+    <Resource Include="Icons\mpPl-Rect3Pt_16x16_dark.png" />
+    <Resource Include="Icons\mpPl-Rect3Pt_32x32.png" />
+    <Resource Include="Icons\mpPl-VxCollin_16x16.png" />
+    <Resource Include="Icons\mpPl-VxCollin_16x16_dark.png" />
+    <Resource Include="Icons\mpPl-VxCollin_32x32.png" />
+    <Resource Include="Icons\mpPl-VxMatchRemove_16x16.png" />
+    <Resource Include="Icons\mpPl-VxMatchRemove_16x16_dark.png" />
+    <Resource Include="Icons\mpPl-VxMatchRemove_32x32.png" />
+    <Resource Include="Images\NoArc1.png" />
+    <Resource Include="Images\NoArc2.png" />
+    <Resource Include="Images\NoArc3.png" />
+    <Resource Include="Images\NoArc4.png" />
+    <Resource Include="Images\ObjToVx_obj.png" />
+    <Resource Include="Images\ObjToVx_pline.png" />
+    <Resource Include="Images\VxCollin_Help.png" />
+    <Resource Include="Resources\mpPlinesEdit_16x16.png" />
+    <Resource Include="Resources\mpPlinesEdit_16x16_dark.png" />
+    <Resource Include="Resources\mpPlinesEdit_32x32.png" />
+    <Resource Include="Resources\mpPlinesEdit_32x32_dark.png" />
+  </ItemGroup>
+
 </Project>

@@ -16,7 +16,9 @@
         [CommandMethod("ModPlus", "mpPl-3Dto2D", CommandFlags.UsePickSet)]
         public static void StartFunction()
         {
-            Statistic.SendCommandStarting(new ModPlusConnector());
+#if !DEBUG
+            Statistic.SendCommandStarting(ModPlusConnector.Instance);
+#endif
             var doc = Application.DocumentManager.MdiActiveDocument;
             var db = doc.Database;
             var ed = doc.Editor;
@@ -25,7 +27,7 @@
                 var pso = new PromptSelectionOptions
                 {
                     AllowDuplicates = false,
-                    MessageForAdding = "\n" + Language.GetItem(PlinesEditFunction.LangItem, "k1") + ":"
+                    MessageForAdding = $"\n{Language.GetItem(PlinesEditFunction.LangItem, "k1")}:"
                 };
                 var filterList = new TypedValue[2];
                 filterList[0] = new TypedValue((int)DxfCode.Start, "POLYLINE");

@@ -17,19 +17,21 @@
         [CommandMethod("ModPlus", "mpPl-ObjectToVx", CommandFlags.UsePickSet)]
         public static void StartFunction()
         {
-            Statistic.SendCommandStarting(new ModPlusConnector());
+#if !DEBUG
+            Statistic.SendCommandStarting(ModPlusConnector.Instance);
+#endif
             try
             {
                 var doc = Application.DocumentManager.MdiActiveDocument;
                 var db = doc.Database;
                 var ed = doc.Editor;
 
-                var peo = new PromptEntityOptions("\n" + Language.GetItem(PlinesEditFunction.LangItem, "k13") + ":")
+                var peo = new PromptEntityOptions($"\n{Language.GetItem(PlinesEditFunction.LangItem, "k13")}:")
                 {
                     AllowNone = false,
                     AllowObjectOnLockedLayer = true
                 };
-                peo.SetRejectMessage("\n" + Language.GetItem(PlinesEditFunction.LangItem, "wrong"));
+                peo.SetRejectMessage($"\n{Language.GetItem(PlinesEditFunction.LangItem, "wrong")}");
                 peo.AddAllowedClass(typeof(Polyline), true);
 
                 var per = ed.GetEntity(peo);
@@ -40,12 +42,12 @@
 
                 var id = per.ObjectId;
 
-                peo = new PromptEntityOptions("\n" + Language.GetItem(PlinesEditFunction.LangItem, "k14") + ":")
+                peo = new PromptEntityOptions($"\n{Language.GetItem(PlinesEditFunction.LangItem, "k14")}:")
                 {
                     AllowNone = false,
                     AllowObjectOnLockedLayer = false
                 };
-                peo.SetRejectMessage("\n" + Language.GetItem(PlinesEditFunction.LangItem, "wrong"));
+                peo.SetRejectMessage($"\n{Language.GetItem(PlinesEditFunction.LangItem, "wrong")}");
                 per = ed.GetEntity(peo);
                 if (per.Status != PromptStatus.OK)
                 {
